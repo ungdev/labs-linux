@@ -1,4 +1,4 @@
-# 2 - Config de base
+# 2 - Configuration de base
 Votre serveur est tout fraîchement installé, mais il reste encore deux trois choses à faire pour vous sentir comme chez vous.
 
 Niveau débutant/intermédiaire

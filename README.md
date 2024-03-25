@@ -1,6 +1,13 @@
-<div style="text-align: center"><h1>UNG - Labs Linux</h1></div>
+<div style="text-align: center"><h1>Atelier UNG - Labs Linux</h1></div>
 
-## Présentation du Wiki 
+## Somaire
+- [Somaire](#somaire)
+- [Présentation de l'atelier UNG](#présentation-de-latelier-ung)
+- [Déroulement des sessions](#déroulement-des-sessions)
+- [Règlement](#règlement)
+- [Présentation des labs](#présentation-des-labs)
+
+## Présentation de l'atelier UNG 
 À travers ce Wiki, l'UNG vous propose de petits labs Linux sans prétention, organisés par **thématiques**.
 
 <details><summary>Il y en a pour <b>tous les niveaux</b>.</summary>
@@ -46,3 +53,9 @@ Nous n'avons que deux règles :
 + **Il n'est pas de questions idiotes**
 
 Il est toutefois fortement recommandé de verrouiller ton PC quand tu quittes ta place - on ne sait jamais ce qui peut arriver si tu le laisses sans défenses, à la merci d'une salle remplie de zinzins de Linux.
+
+## Présentation des labs
+Les labs sont organisés par **thématiques**. Chaque thématique est composée de **plusieurs labs**.  
+Voici la liste des thématiques actuellement disponibles :
+* [Thématique 1: Installation & Commandes de base](1-installation-commandes/README.md)
+* [Thématique 2: Configuration de base](2-config-de-base/README.md)
