@@ -6,7 +6,7 @@
 
 Contrairement à, par exemple, Windows ou MacOS, qui à la version près, donnent des installations très similaires, **deux systèmes basés sur Linux peuvent s'utiliser et s'administrer de façons complètement différentes**. 
 
-Si vous êtes habitués à utiliser Windows 11 sur votre ordi (mauvaise habitude), vous n'aurez sûrement aucun mal à donner un coup de main à un collègue lui aussi sous Windows 11. Par contre, si vous êtes habitués à utiliser Ubuntu Desktop 22.04 avec environnement de bureau Gnome, vous pourriez avoir bien du mal à ne serait-ce qu'installer un logiciel sur le PC votre collègue sous Arch avec environnement de bureau bspwm sans consulter la doc. D'ailleurs, votre box internet tourne sûrement sous Linux, tout comme votre téléphone sous Android qui est basé sur le noyau Linux.
+Si vous êtes habitués à utiliser Windows 11 sur votre ordi (mauvaise habitude), vous n'aurez sûrement aucun mal à donner un coup de main à un collègue lui aussi sous Windows 11. Par contre, si vous êtes habitués à utiliser Ubuntu Desktop 22.04 avec environnement de bureau Gnome, vous pourriez avoir bien du mal à ne serait-ce qu'installer un logiciel sur le PC votre collègue sous Arch avec un environnement de fenêtre bspwm sans consulter la doc. D'ailleurs, votre box internet tourne sûrement sous Linux, tout comme votre téléphone sous Android qui est basé sur le noyau Linux.
 
 **Linux à proprement parler n'est que le noyau** (*kernel*) de l'OS, c'est-à-dire, un programme assez balèze qui assure des fonctions bas-niveau, comme par exemple :
 + Gestion de la mémoire
@@ -16,6 +16,10 @@ Si vous êtes habitués à utiliser Windows 11 sur votre ordi (mauvaise habitude
 + Fourniture de services et d'abstractions aux applications
     - Par exemple, l'appel système `write` vous permet d'écrire dans un fichier sans vous préoccuper du type de média ou du système de fichier qui le stocke.
     - Ces interfaces ne sont généralement pas directement utilisées par les applications mais plutôt par des **libraries** comme *glibc* (la bibilothèque C standard GNU), qui offrent des interfaces plus haut niveau - par exemple, `printf` qui permet à un programme d'écrire un message formaté sur sa sortie standard. 
+    - (**/!\ Technique ici**) En faite, les appels systèmes (*System call interface*) sont une API vers le kernel; un programme n'interface qu'avec le matériel via le kernel, d'un point de vu fondamental, l'API n'est qu'une abstraction fonctionnel de l'*Application Binary Interface* (**ABI**)
+      - De façon encore plus fondamentale, il est impossible fonctionnellement pour un programme de communiquer directement avec le matériel sans passer par le kernel, il s'agit d'un abstraction donné par le principe du *kernel space* et *user space*. (Attention il ne faut pas le confondre avec le *ring 0* et *ring 3* des processeurs x86 qui en est l'application matériel, et encore moins avec les modes de compatibilité des processeurs, *real mode*, *protected mode*, *long mode* etc.).  
+      Ainsi pour permettre à un programme de communiquer avec le matériel, il doit faire appel à une fonction du kernel (un *syscall*) qui elle même fera appel à une fonction du matériel (décrit par le *module*), c'est ce qu'on appelle le *kernel space*.  
+        > Ainsi les anti-cheat niveau *kernel* n'existe pas à proprement parlé, ils utilisent leur propre *module* qui permet de faire l'interface.
 
 *Si cette notion de noyau n'est pas claire pour vous, faites l'analogie avec un fruit. Le noyau, c'est cette partie dure et indigeste, qui est au centre du fruit, sur laquelle repose la pulpe sucrée (les applications destinées aux utilisateurs). Bon, ça marche surtout avec des fruits comme la pêche ou l'abricot, mais un peu moins avec l'anacarde, je vous l'accorde.*
 
