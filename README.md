@@ -6,6 +6,7 @@
 - [Déroulement des sessions](#déroulement-des-sessions)
 - [Règlement](#règlement)
 - [Présentation des labs](#présentation-des-labs)
+- [Remerciements aux contributeurs](#remerciements-aux-contributeurs)
 
 ## Présentation de l'atelier UNG 
 À travers ce Wiki, l'UNG vous propose de petits labs Linux sans prétention, organisés par **thématiques**.
@@ -59,3 +60,11 @@ Les labs sont organisés par **thématiques**. Chaque thématique est composée 
 Voici la liste des thématiques actuellement disponibles :
 * [Thématique 1: Installation & Commandes de base](1-installation-commandes/README.md)
 * [Thématique 2: Configuration de base](2-config-de-base/README.md)
+
+## Remerciements aux contributeurs
+* Felix Houdebert, pour l'aide à l'écriture des labs
+* Ann Neveu, pour les visuels
+* Alban Souchard, le président de l'UNG, et la communication
+* Noe Charlier, pour les idées
+* Guillaume Etheve, pour l'aide, et les idées
+* Et tous les autres membres de l'UNG qui ont participé à la création de ce projet !
