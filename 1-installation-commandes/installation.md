@@ -6,7 +6,7 @@
 
 Contrairement à, par exemple, Windows ou MacOS, qui à la version près, donnent des installations très similaires, **deux systèmes basés sur Linux peuvent s'utiliser et s'administrer de façons complètement différentes**. 
 
-Si vous êtes habitués à utiliser Windows 11 sur votre ordi (mauvaise habitude), vous n'aurez sûrement aucun mal à donner un coup de main à un collègue lui aussi sous Windows 11. Par contre, si vous êtes habitués à utiliser Ubuntu Desktop 22.04 avec environnement de bureau Gnome, vous pourriez avoir bien du mal à ne serait-ce qu'installer un logiciel sur le PC votre collègue sous Arch avec environnement de bureau i3 sans consulter la doc. D'ailleurs, votre box internet tourne sûrement sous Linux, tout comme votre téléphone sous Android qui est basé sur le noyau Linux.
+Si vous êtes habitués à utiliser Windows 11 sur votre ordi (mauvaise habitude), vous n'aurez sûrement aucun mal à donner un coup de main à un collègue lui aussi sous Windows 11. Par contre, si vous êtes habitués à utiliser Ubuntu Desktop 22.04 avec environnement de bureau Gnome, vous pourriez avoir bien du mal à ne serait-ce qu'installer un logiciel sur le PC votre collègue sous Arch avec environnement de bureau bspwm sans consulter la doc. D'ailleurs, votre box internet tourne sûrement sous Linux, tout comme votre téléphone sous Android qui est basé sur le noyau Linux.
 
 **Linux à proprement parler n'est que le noyau** (*kernel*) de l'OS, c'est-à-dire, un programme assez balèze qui assure des fonctions bas-niveau, comme par exemple :
 + Gestion de la mémoire
