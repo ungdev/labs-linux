@@ -1,11 +1,6 @@
-# 1 - Installation du système d'exploitation
+# 1.1 - Installation du système d'exploitation
 
-<details><summary>Ce tuto est principalement destiné aux <b>débutants</b>. </summary>
-
-Nous avons tout de même essayé de pousser un peu le niveau de détails pour que même les linuxiens qui commencent à s'y connaître un peu puissent apprendre deux trois trucs.
-</details>
-
-## Introduction
+## 1.1.0 Introduction
 
 <details><summary>Il n'y a <b>pas UN, mais DES systèmes Linux</b>.</summary>
 
@@ -75,7 +70,7 @@ Nous allons donc :
 + Vous proposer d'<u>installer une distribution pour serveurs</u>.
 
 
-## 1.1 Qu'est-ce qu'une distribution
+## 1.1.1 Qu'est-ce qu'une distribution
 
 
 #### Principe d'une distribution
@@ -146,7 +141,7 @@ Tl;dr :
 </br>
 
 
-## 1.2 Présentation des distributions Linux phare
+## 1.1.2 Présentation des distributions Linux phare
 <details><summary>Il existe toute une floppée de distributions. De plus, certaines distributions sont basées sur d'autres (on parle souvent de <b>familles</b> de distributions). Voyez par vous-mêmes :</summary>
 
 + [Liste (non-exhaustive) des distributions Linux grand-public](https://fr.wikipedia.org/wiki/Liste_des_distributions_GNU/Linux)
@@ -182,7 +177,7 @@ Tl;dr :
 
 [Plus de distributions](https://en.wikipedia.org/wiki/Comparison_of_Linux_distributions)
 
-## 1.3 Choisir une distribution Linux adaptée aux serveurs
+## 1.1.3 Choisir une distribution Linux adaptée aux serveurs
 #### Voici ce que l'on attend d'une distribution pour serveurs :
 + **Stabilité**
 + Vaste communauté, doc bien fournie
@@ -209,9 +204,9 @@ Tl;dr :
     - Vous aurez selon toute probabilité besoin de l'installateur `Intel/AMD x86_64`.
         * Vous avez le choix entre une installation **complète hors ligne (DVD)**, complète en ligne (Boot) ou minimale hors ligne (Minimal). **Nous recommandons l'installation "DVD".**
 
-## 1.4 Installation d'une distribution pour serveurs
+## 1.1.4 Installation d'une distribution pour serveurs
 
-### 1.4.1 Installation sur une machine virtuelle
+### 1.1.4.1 Installation sur une machine virtuelle
 <details><summary>L'installation sur VM vous permettra d'utiliser Linux depuis votre système hôte.</summary>
 
 Vous pourrez aussi créer plusieurs VMs pour simuler un parc de serveurs.
@@ -233,7 +228,7 @@ D'ailleurs, la plupart des admins hébergent leurs services sur des VMs : cela o
 </details>
 </details>
 
-#### 1.4.1.A Mise en place de la VM
+#### 1.1.4.1.A Mise en place de la VM
 <details><summary>Nous utiliserons <i>VirtualBox</i> pour notre exemple.</summary>
 
 ##### I. Créer la VM
@@ -398,7 +393,7 @@ Vous pouvez ensuite, avec un navigateur sur votre système hôte, vous rendre su
 
 ---
 
-### 1.4.2 Installation sur un hôte physique
+### 1.1.4.2 Installation sur un hôte physique
 <details><summary>Avec la même image ISO, vous pouvez aussi installer la distribution choisie directement sur un ordinateur (on parle d'installation <i>bare-metal</i>). Nous allons pour cela utiliser une clef USB bootable.</summary>
 
 **ATTENTION** : L'installateur aura besoin de réserver de l'espace disque pour Linux. Si vous êtes amenés à supprimer ou à reformater des partitions existantes, vous **perdrez les données qu'elles contiennent**. Vous serez prévenu par l'installateur si la manip est risquée. <u>**En cas de doute, faites une sauvegarde de vos données et faites vous aider**.</u>
@@ -465,7 +460,7 @@ Vous pouvez ensuite, avec un navigateur sur votre système hôte, vous rendre su
 
 ---
 
-### 1.4.3 Pour aller plus loin : Automatisation
+### 1.1.4.3 Pour aller plus loin : Automatisation
 
 <details><summary>Pour les organisations qui déploient fréquemment des serveurs, <b>l'installation et la configuration initiale peuvent être automatisées</b> :</summary>
 
