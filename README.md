@@ -57,9 +57,24 @@ Il est toutefois fortement recommandé de verrouiller ton PC quand tu quittes ta
 
 ## Présentation des labs
 Les labs sont organisés par **thématiques**. Chaque thématique est composée de **plusieurs labs**.  
-Voici la liste des thématiques actuellement disponibles :
+> L'ordre des thématiques est arbitraire, et il n'est pas nécessaire de les suivre dans l'ordre.
+
+Voici la liste des thématiques actuellement disponibles et à venir:
 * [Thématique 1: Installation & Commandes de base](1-installation-commandes/README.md)
 * [Thématique 2: Configuration de base](2-config-de-base/README.md)
+* [Thématique 3: Serveur web de base]
+* [Thématique 4: Gestion des services]
+* [Thématique 5: Sécurité des serveurs web]
+* [Thématique 6: Installation d'une application web]
+* [Thématique 7: Surveillance et maintenance]
+* [Thématique 8: Docker](8-docker/README.md)
+* [Thématique 9: Sauvegarde et Restauration]
+* [Thématique 10: Documentation et Bonnes Pratiques]
+* [Thématique 11: Automatisation]
+* [Thématique 12: Haute disponibilité et scalabilité]
+* [Thématique 13: La théorie derrière Linux et les OS]
+
+> Les thématiques sont susceptibles d'évoluer, et de nouvelles thématiques peuvent être ajoutées/retirées.
 
 ## Remerciements
 * Félix Houdebert, pour l'aide à l'écriture des labs
