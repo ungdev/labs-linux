@@ -29,7 +29,10 @@ La commande `ip` vous permet d'inspecter et modifier manuellement votre config r
             sudo ip -6 a add 2001:db8:cafe::/64 dev enp37s0     # ipv6 (-6)
             ```
         * Vous pouvez aussi indiquer le masque au format décimal pointé : `sudo ip address add 192.168.1.10 255.255.255.0 dev enp37s0`
-    - *NB : une même interface peut avoir plusieurs adresses IP ; Une même machine peut avoir plusieurs interfaces (et donc aussi évidemment avoir plusieurs adresses IP)*
+    - *NB :*
+      - *Une même interface peut avoir plusieurs adresses IP*
+      - *Une même machine peut avoir plusieurs interfaces (et donc aussi évidemment avoir plusieurs adresses IP)*
+        - *Une même machine peut avoir des IP dans des réseaux différents (pense à un routeur)*
 + `ip route` : affiche la table de routage
 + `ip route add <ip>/<mask> via <ip>` : Ajouter une route
     - Exemple :
