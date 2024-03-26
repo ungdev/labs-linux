@@ -15,6 +15,8 @@
     - 
 </details>
 
+![Des roseaux communs](img/roseaux.jpg)
+
 ### Configuration statique ou dynamique
 <details>
 
