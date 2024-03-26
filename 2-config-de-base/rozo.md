@@ -1,6 +1,6 @@
 # 2.3 - Configuration réseau de base
 
-## 2.3.A - Principe
+## 2.3.1 - Principe
 <details><summary>Pour communiquer avec le monde extérieur, votre système a besoin...</summary>
 
 + D'une **adresse IP**
@@ -29,7 +29,7 @@
 
 </details>
 
-## 2.3.B - Config manuelle temporaire avec iproute2
+## 2.3.2 - Config manuelle temporaire avec iproute2
 <details><summary>La commande <code>ip</code> vous permet d'inspecter et modifier manuellement votre config réseau. Les modifications sont <b>temporaires</b>.</summary>
 
 + `ip address` : affiche les paramètres de niveau 2 et 3 pour toutes vos interfaces
@@ -77,7 +77,7 @@
 
 </details>
 
-## 2.3.C - Config persistente avec NetworkManager
+## 2.3.3 - Config persistente avec NetworkManager
 <details><summary><i>NetworkManager</i> est un <i>daemon</i> de configuration réseau qui est en train de devenir la méthode de configuration préférée de la plupart des distributions.</summary>
 
 Il définit et gère des profils de configuration qui s'appellent des **connexions**.
@@ -144,7 +144,7 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
 </details>
 
 
-## 2.3.D - Config du resolver DNS (resolv.conf)
+## 2.3.4 - Config du resolver DNS (resolv.conf)
 <details><summary><code>/etc/resolv.conf</code> contient la config du resolver DNS</summary>
 
 ![Exemple de /etc/resolv.conf](img/resolvconf.png)
@@ -162,7 +162,7 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
 </details>
 
 
-## 2.3.E - Outils de dépannage
+## 2.3.5 - Outils de dépannage
 <details><summary>Quelques outils qui peuvent s'avérer pratiques pour quand Google est cassé...</summary>
 
 + `ping` : test de connectivité IP - **la base pour tester la couche 3**

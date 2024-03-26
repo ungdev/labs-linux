@@ -101,7 +101,7 @@ Pour plus d'informations sur les commandes Docker, vous pouvez consulter la docu
 
 <details><summary>Exercices</summary>
 Le premier exercice consiste à tester l'installation de Docker et à exécuter un conteneur Docker très simple:
-<details><summary>Exercices  <b> très basique </b> </summary>
+<details><summary>Exercice  <b> très basique </b> </summary>
 
 1. Lancer un conteneur Docker avec l'image `hello-world` :
    ```bash
@@ -119,7 +119,7 @@ Bon après cette courte introduction à Docker, nous allons voir comment Docker 
 
 </details>
 
-<details><summary>Exercices  <b> serveur web basique</b> </summary>
+<details><summary>Exercice  <b> serveur web basique</b> </summary>
 
 Vous devez déployer un serveur web; avec **persistance des données.**  
 
@@ -135,17 +135,20 @@ Les options utilisées dans cette commande sont les suivantes :
 - `-d` : Exécute le conteneur en arrière-plan.
 - `--name webserver` : Donne un nom au conteneur.
 - `-p 80:80` : Mappe le port 80 du conteneur sur le port 80 de l'hôte.
-- `-v /path/to/your/html:/usr/share/nginx/html` : Montre un volume pour persister les données du serveur web.
+- `-v /path/to/your/html:/usr/share/nginx/html` : Monte un volume pour persister les données du serveur web.
 
 </details>
+</details>
 
-
+<details><summary>Exercice <b> Dockerfile </b> </summary>
 Vous allez maintenant apprendre à créer une image Docker à partir d'un fichier `Dockerfile` et à exécuter un conteneur Docker à partir de cette image.
+</details>
 </details>
 
 ### Les bases de Docker Compose
 
 <details><summary>Détails</summary>
+</details>
 
 #### Les commandes de base
 
