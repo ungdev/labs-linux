@@ -15,4 +15,5 @@ On a tout de même essayé de pousser un peu le niveau de détails pour que mêm
         * [1.1.4.2 - Installation sur un hôte physique](installation.md#1142-installation-sur-un-hôte-physique)
         * [1.1.4.3 - Pour aller plus loin : Automatisation de l'installation et de la config initiale](installation.md#1143-pour-aller-plus-loin--automatisation)
 + [1.2 - Shell et commandes de base](shell-commandes.md)
-    - Tout Doux !
+  - [1.2.1 - Le shell](shell-commandes.md#121-le-shell)
+  - [1.2.2 - Les commandes de base](shell-commandes.md#122-les-commandes-de-base)
