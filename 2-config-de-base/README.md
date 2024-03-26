@@ -12,3 +12,8 @@ Niveau débutant/intermédiaire
     - [RHEL](packages.md#rhel)
     - [Debian](packages.md#debian)
 + [2.3 - Configuration réseau de base](rozo.md)
+    - [2.3.A Principe](rozo.md#23a---principe)
+    - [2.3.B Config manuelle temporaire avec *iproute2*](rozo.md#23b---config-manuelle-temporaire-avec-iproute2)
+    - [2.3.C Config persistente avec *NetworkManager*](rozo.md#23c---config-persistente-avec-networkmanager)
+    - [2.3.D Config du resolver DNS (*resolv.conf*)](rozo.md#23d---config-du-resolver-dns-avec-resolvconf)
+    - [2.3.E Outils de dépannage](rozo.md#23e---outils-de-dépannage)

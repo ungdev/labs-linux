@@ -1,7 +1,8 @@
 # 2.3 - Configuration réseau de base
 
-## Principe
-Pour communiquer avec le monde extérieur, votre système a besoin :
+## 2.3.A - Principe
+<details><summary>Pour communiquer avec le monde extérieur, votre système a besoin...</summary>
+
 + D'une **adresse IP**
     - Identifie la machine de manière unique sur le réseau
 + D'un **masque de sous-réseau**
@@ -11,8 +12,12 @@ Pour communiquer avec le monde extérieur, votre système a besoin :
     - Adresse IP du routeur qui permet d'atteindre d'autres réseaux.
 + Pour pouvoir résoudre des noms de domaine, de l'adresse d'au moins 1 **serveur DNS**.
     - Allez-vous habituellement voir votre emploi du temps sur `ent.utt.fr`, ou bien sur `193.50.230.1` ? On s'est compris.
+    - 
+</details>
 
 ### Configuration statique ou dynamique
+<details>
+
 + Si vous n'avez pas à configurer ces paramètres à chaque fois que vous vous connectez sur un nouveau réseau avec votre PC, c'est grâce au **DHCP** (*Dynamic Host Configuration Protocol*, parfois aussi connu à tort sous l'appellation *Dark-green Hot Chili Peppers*). Lorsque votre PC rejoint un nouveau réseau, il contacte automatiquement son serveur DHCP pour obtenir tous ces paramètres : on parle alors **d'adressage dynamique**.
     - *Chez vous, le serveur DHCP tourne généralement sur votre box.*
 + En revanche, **pour des serveurs, on préfère l'adressage statique**. On fournit donc tous ces paramètres manuellement.
@@ -20,9 +25,10 @@ Pour communiquer avec le monde extérieur, votre système a besoin :
     - On aime bien choisir nous-mêmes son adresse IP, et être sûrs qu'elle ne changera pas.
     - On ne veut pas dépendre d'un autre composant - s'il lui arrivait un malheur, on toute l'infra se retrouverait sans accès au réseau.
 
+</details>
 
-## Config manuelle temporaire avec iproute2
-La commande `ip` vous permet d'inspecter et modifier manuellement votre config réseau. Les modifications sont **temporaires**.
+## 2.3.B - Config manuelle temporaire avec iproute2
+<details><summary>La commande <code>ip</code> vous permet d'inspecter et modifier manuellement votre config réseau. Les modifications sont <b>temporaires</b>.</summary>
 
 + `ip address` : affiche les paramètres de niveau 2 et 3 pour toutes vos interfaces
     - `ip a` : raccourci
@@ -55,7 +61,11 @@ La commande `ip` vous permet d'inspecter et modifier manuellement votre config r
     - `ip -6` pour de l'IPv6
 + `ip route add default via <ip>` : Ajouter une route par défaut (0.0.0.0/0)
 
+</details>
+
 ### Pour aller plus loin
+<details>
+
 + La commande `ip` peut faire bien plus que set votre addresse IP :
     - Créer un [bond LACP](http://www.uni-koeln.de/~pbogusze/posts/LACP_configuration_using_iproute2.html) pour doubler un lien,
     - Changer les paramètres des protocoles bas niveau comme la [MTU](https://www.baeldung.com/linux/maximum-transmission-unit-change-size), 
@@ -63,8 +73,10 @@ La commande `ip` vous permet d'inspecter et modifier manuellement votre config r
     - [Ponter deux interfaces](https://unix.stackexchange.com/questions/255484/how-can-i-bridge-two-interfaces-with-ip-iproute2)  ...
 + `ip route` est capable de gérer routes complexes, voire de gérer plusieurs tables de routage - *par exemple, quand vous avez une interface publique et une interface d'admin, vous pouvez configurer une autre passerelle par défaut pour les paquets sourcés par votre interface d'admin.*
 
-## Config permanente guidée avec NetworkManager
-*NetworkManager* est un *daemon* de configuration réseau qui est en train de devenir la méthode de configuration préférée de la plupart des distributions.
+</details>
+
+## 2.3.C - Config persistente avec NetworkManager
+<details><summary><i>NetworkManager</i> est un <i>daemon</i> de configuration réseau qui est en train de devenir la méthode de configuration préférée de la plupart des distributions.</summary>
 
 Il définit et gère des profils de configuration qui s'appellent des **connexions**.
 
@@ -114,8 +126,10 @@ On interagit avec ce *daemon* via un front-end comme :
 
 *NetworkManager* est très complet et peut aussi gérer des connexions complexes (bond LACP, VLANs ...)
 
+
 ### Autres méthodes de configuration réseau permanente
-Sur les distributions récentes, **NetworkManager est LA méthode de configuration réseau à privilégier.**
+
+<details><summary>Sur les distributions récentes, <b>NetworkManager est LA méthode de configuration réseau à privilégier.</b></summary>
 
 Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer des connexions persistentes :
 + [`netplan`](https://doc.ubuntu-fr.org/netplan) d'Ubuntu
@@ -123,8 +137,15 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
 + [`/etc/network/interfaces`](https://www.malekal.com/etc-network-interfaces-configurer-le-reseau-sur-debian/) de Debian
 + [`/etc/sysconfig/network-scripts`](https://www.cyberciti.biz/faq/how-to-configure-a-static-ip-address-on-rhel-8/) sur d'anciens RHEL
 
-## Config DNS avec Resolv.conf
-+ `/etc/resolv.conf` contient votre config DNS ; Sa syntaxe est très simple et vous pouvez la modifier manuellement
+</details>
+
+</details>
+
+
+## 2.3.D - Config du resolver DNS (resolv.conf)
+<details><summary><code>/etc/resolv.conf</code> contient la config du resolver DNS</summary>
+
++ Sa syntaxe est très simple et vous pouvez la modifier manuellement
     - `nameserver <ip>` : Adresse d'un serveur DNS. 3 maximum, du plus prioritaire au moins prioritaire.
     - `search <base-domain...>` : Domaines de recherche pour les noms courts.
         * Par exemple, avec `search utt.fr assos.utt.fr`, `charcutt` va d'abord être interprété comme `charcutt.utt.fr` et en cas d'échec comme `charcutt.assos.utt.fr`.
@@ -134,7 +155,12 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
 + Votre OS utilise probablement *NetworkManager*, et dans ce cas, c'est lui qui gère le contenu de ce fichier. Les modifications seront perdues au redémarrage de *NetworkManager*.
     - Un commentaire en début de fichier vous prévient si c'est le cas
 
-## Outils de dépannage
+</details>
+
+
+## 2.3.E - Outils de dépannage
+<details><summary>Quelques outils qui peuvent s'avérer pratiques pour quand Google est cassé...</summary>
+
 + `ping` : test de connectivité IP - **la base pour tester la couche 3**
     - `-6` : IPv6
     - `-I` : Interface source
@@ -168,22 +194,33 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
     - Souvent pas installé par défaut
 + `iptraf` : Statistiques d'utilisation TCP/IP, sur un menu interactif facile à utiliser.
     - Non installé par défaut
+  
+</details>
 
 ## Exercices
+
 ### Exercice 1 : iproute2 (très facile)
+<details>
+
 + Affichez les interfaces réseau disponibles. Affichez les routes disponibles. Repérez l'interface avec laquelle vous accédez à Internet.
 + Ajoutez une deuxième adresse IP sur cette interface réseau, dans le même subnet que l'adresse IP actuelle.
 + Pingez cette nouvelle IP. Vous devez avoir des réponses.
 + Supprimez votre route par défaut et reconfigurez-la manuellement avec `iproute2`. Vous devez pouvoir ping `8.8.8.8`.
+</details>
 
 ### Exercice 2 : NetworkManager (facile)
+<details>
+
 + Si vous avez obtenu vos paramètres réseau automatiquement, utilisez `nmtui` pour les redéfinir manuellement (en adressage statique)
 + Avec `nmcli`, listez vos connexion puis affichez les détails de la connexion que vous avez modifiée.
 + Inspectez le fichier de configuration de la connexion *NetworkManager*. En éditant ce fichier, modifiez le nom de la connexion. Si vous avez deux serveurs DNS de configurés, inversez leur ordre. Appliquez les changements.
 + Vérifiez que le nom de la nouvelle connexion a changé avec `nmcli`.
 + Affichez les logs de `NetworkManager`
+</details>
 
 ### Exercice 3 : Couche 4 (modéré)
+<details>
+
 Vous avez besoin d'une machine cliente et d'un serveur distant capable de recevoir des connexions SSH. *(Si votre serveur est une VM tournant sur un système hôte, le client peut très bien être le système hôte.)*
 
 Pour un client Windows, il faudra télécharger `ncat` et `nmap` sur [https://nmap.org/](https://nmap.org/).
@@ -194,11 +231,15 @@ Pour un client Windows, il faudra télécharger `ncat` et `nmap` sur [https://nm
 + Toujours depuis le serveur, dans un autre terminal, affichez les ports TCP en écoute.
 + Depuis le client, maintenant, utilisez `nmap` pour scanner les ports TCP ouverts sur le serveur. Vous devez voir le port 2024.
 + Encore depuis le client, à l'aide de `netcat` / `ncat` / `nc`, envoyez un message à votre serveur. Le serveur doit recevoir le message.
+</details>
 
 ### Exercice 4 : tcpdump (intermédiaire)
+<details>
+
 Vous avez besoin d'une machine cliente avec une interface graphique, et un serveur distant capable de recevoir des connexions SSH. *(Si votre serveur est une VM tournant sur un système hôte, le client peut très bien être le système hôte.)*
 
 + Sur le serveur, lancer un `watch -n 10 curl toastytech.com/evil/index.html`
 + Depuis le client, capturer les paquets HTTP et DNS sur le serveur distant pendant 1 minute. Puis, interrompre `watch` sur le serveur.
 + Côté client, analyser les [paquets avec Wireshark](https://www.it-connect.fr/le-suivi-dune-connexion-tcp-avec-wireshark/).
     - [Explications détaillées (TP de RE04)](https://drive.google.com/file/d/1scP4gicq6XUY3n617jVEfT3khFQSlrAO/view?usp=drive_link)
+</details>
