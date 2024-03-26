@@ -1,6 +1,6 @@
 # 8.1 - Introduction à l'architecture microservices
 
-## 8.1.0 Qu'est-ce qu'une architecture microservices
+## 8.1.1 Qu'est-ce qu'une architecture microservices
 
 <details><summary>Principe <b> général </b> d'une architecture microservices</summary>
 
@@ -24,7 +24,7 @@ Jusqu'à présent, nous avons principalement travaillé avec des applications mo
 
 > Nous allons voir dans les prochaines parties comment **Docker** peut vous aider à mettre en place une architecture microservices.
 
-## 8.1.1 Introduction à Docker
+## 8.1.2 Introduction à Docker
 
 Docker est une plateforme open-source qui permet de **développer**, **déployer**, et **exécuter** des applications dans des conteneurs. 
 
@@ -246,19 +246,4 @@ On peut utiliser la commande `docker build` pour construire une image Docker à 
 </details>
 
 </details>
-</details>
-
-### Les bases de Docker Compose
-
-<details><summary>Détails</summary>
-</details>
-
-#### Les commandes de base
-
-
-
-</details>
-
-<details><summary>Exercices</summary>
-
 </details>
