@@ -88,6 +88,8 @@ Le port standard sur lequel écoute un serveur SSH est le port **22/tcp**.
     - `ssh localhost`
         * `ssh` provient du paquet `openssh-client[s]`
 
+**_NB : Si vous avez une VM en mode NAT, il vous faudra une [règle de redirection de port](https://nsrc.org/workshops/2014/sanog23-virtualization/raw-attachment/wiki/Agenda/ex-virtualbox-portforward-ssh.htm) pour exposer votre service SSH au monde extérieur_**.
+
 </details>
 
 <details><summary><b>SSH, côté serveur : Exercices</b><br/></summary>
@@ -107,7 +109,21 @@ Vous aurez besoin d'un éditeur de texte comme [vi](https://linux.goffinet.org/a
 Vous pouvez tester la modification en vous connectant localement : `ssh localhost`.
 </details>
 
-#### Exercice 2 : Contrôle d'accès basique (modéré) 
+#### Exercice 2 : Modifier les paramètres réseau du serveur SSH (facile) 
+<details><summary>Pour des raisons de sécurité, un serveur a le plus souvent une interface réseau dédiée à l'administration, avec une adresse IP propre. C'est sur cette interface uniquement que l'on expose le service.</summary>
+
+Même si vous n'avez sûrement quant à vous qu'une interface réseau, vous allez faire comme si, et durcir la configuration réseau du serveur SSH.
+
+Le but est __de *bind* le serveur SSH à une seule adresse IP plutôt qu'à toutes les adresses du serveur__</u>
+    - *Indice :* [*ListenAdress*](https://www.cyberciti.biz/tips/howto-openssh-sshd-listen-multiple-ip-address.html)
+
++ Vous pouvez tester la modification avec la commande : `ss -lt` (liste des sockets TCP en écoute de connexions entrantes).
+    - Si le port `ssh` n'est plus en écoute sur `0.0.0.0` et `::`, mais sur les adresses que vous avez indiquées, vous avez réussi.
+
+Indiquer la *"bind address"* est une bonne pratique que vous serez amenés à mettre en oeuvre avec tous vos services.
+</details>
+
+#### Exercice 3 : Contrôle d'accès basique (modéré) 
 <details>
 
 Vos objectifs sont :
@@ -127,7 +143,7 @@ Vos objectifs sont :
 
 </details>
 
-#### Exercice 3 : Fail2Ban (avancé) 
+#### Exercice 4 : Fail2Ban (avancé) 
 <details>
 
 + Installer et configurer [`fail2ban`](https://doc.ubuntu-fr.org/fail2ban) **pour mettre en quarantaine pour 4h les IP qui connaissent un échec d'authentification plus de 3 fois de suite en 5 minutes.**

@@ -191,20 +191,26 @@ Tl;dr :
 + Des applications et une configuration par défaut adaptées
     - Par exemple, un serveur SSH pour se connecter à distance
 
-#### Nous vous recommandons l'une des deux distributions suivantes :
-+ [**Ubuntu Server 24.04 LTS**](https://releases.ubuntu.com/24.04/) <!-- (SORTIE EN AVRIL) -->
+#### Nous recommandons l'une des deux distributions suivantes :
++ [**Ubuntu Server 22.04 LTS**](https://releases.ubuntu.com/22.04/)
     - _**"LTS"**_ signifie *"Long-Term Support"*. De telles versions d'Ubuntu sortent tous les deux ans et ont une **durée de support total garantie de 5 ans** à partir de leur date de sortie. Elles continuent ensuite de recevoir des **mises à jour de sécurité pendant 5 autres années**.
-    - À privilégier si vous souhaitez vous familiariser avec les **écosystèmes Debian et Ubuntu**
+        * *NB : Ubuntu 24.04 LTS sortira en avril 2024.*
     - Vous aurez selon toute probabilité besoin de l'installateur `amd64`.
+    - À privilégier si :
+        * Vous souhaitez vous familiariser avec les **écosystèmes Debian et Ubuntu**
+        * Votre objectif est de vous former pour rejoindre le **SIA**
 + [**Alma Linux 9**](https://almalinux.org/get-almalinux/)
     - Là aussi, l'on vous promet **5 ans de full-support** à partir de 2022 puis **5 autres années de maintenance (patchs de sécurité et bugfixes majeurs)**.
-    - À privilégier si vous souhaitez vous familiariser avec l'**écosystème RedHat**
-        * NB: Vous pourriez tout aussi bien opter pour Rocky Linux 9, qui est elle aussi quasiment identique à RHEL 9.
+    - NB: Vous pourriez tout aussi bien opter pour Rocky Linux 9, qui est elle aussi quasiment identique à RHEL 9.
+    - À privilégier si :
+        - Vous souhaitez vous familiariser avec l'**écosystème RedHat**
+        - Votre objectif est de vous former pour une **entreprise** qui utilise un RHEL-like
     - NB : les distributions RHEL-like proposent une interface web de gestion, [Cockpit](https://www.linuxtricks.fr/wiki/administrer-sa-machine-avec-cockpit-fedora-red-hat-et-derivees)
     - Vous aurez selon toute probabilité besoin de l'installateur `Intel/AMD x86_64`.
-        * Vous avez le choix entre une installation **complète hors ligne (DVD)**, complète en ligne (Boot) ou minimale hors ligne (Minimal). **Nous recommandons l'installation "DVD".**
+        * Nous recommandons l'image de type *"DVD"* (installation complète hors ligne).
 
 ## 1.1.4 Installation d'une distribution pour serveurs
+Le tuto qui suit est destiné aux **grands débutants**. L'installation d'une distribution grand public est **très intuitive**, et vous trouverez facilement de la **doc en ligne**. N'hésitez donc pas à vous passer de ce tuto.
 
 ### 1.1.4.1 Installation sur une machine virtuelle
 <details><summary>L'installation sur VM vous permettra d'utiliser Linux depuis votre système hôte.</summary>
@@ -257,19 +263,20 @@ D'ailleurs, la plupart des admins hébergent leurs services sur des VMs : cela o
     - ![](img/instal/v1dharddsk.png)
 </details>
 
-##### II. Modifier les paramètres réseau de la VM
+##### II. Point sur les paramètres réseau de la VM
 <details><summary>Par défaut, la VM est connectée à votre hôte <a href="https://www.virtualbox.org/manual/ch06.html">en mode "NAT"</a>, ce qui veut dire que votre VM communique avec le monde extérieur à travers l'IP de votre système hôte.</summary>
 
-+ Cela implique que, chaque fois que vous souhaiterez exposer un service, vous devrez **créer une règle NAT** ("Ouvrir un port" comme on dit parfois) sur votre système hôte pour accéder au service depuis l'extérieur de la VM.
-    - E.g. *"Redirige les paquets pour 192.168.1.10:8080 vers 192.168.122.1:80"*
+Nous allons pour le moment garder ce mode par défaut, qui facilite la connexion depuis le réseau WiFi de l'UTT. Il y a toutefois quelques choses à savoir :
+
++ Le mode NAT implique que, chaque fois que vous souhaiterez exposer un service, vous devrez **créer une règle NAT** ("Ouvrir un port" comme on dit parfois) sur votre système hôte pour accéder au service depuis l'extérieur de la VM.
+    - E.g. *"Redirige les paquets pour 192.168.1.10:8080 vers 192.168.122.1:80"* pour exposer un serveur web qui écoute sur le port 80.
 + Cela complique aussi la communication inter-VMs
 
-Pour cette raison, nous recommandons d'utiliser plutôt [le **mode "Bridge"**](https://www.virtualbox.org/manual/ch06.html) - votre **VM sera sur le même réseau local que votre système hôte**, comme si elle était elle aussi **directement connectée à votre box**. Vous pourrez facilement accéder à ses services depuis l'extérieur et configurer des règles spécialement pour votre serveur sur votre box. Vos VMs communiqueront facilement entre elles.
-</details>
+Si vous suivez ce tuto **<u>chez vous</u>**, préférez [le **mode "Bridge"**](https://www.virtualbox.org/manual/ch06.html) - votre **VM sera sur le même réseau local que votre système hôte**, comme si elle était elle aussi **directement connectée à votre box**. Vous pourrez facilement accéder à ses services depuis l'extérieur et configurer des règles spécialement pour votre serveur sur votre box. Vos VMs communiqueront facilement entre elles.
 
-<details>
+<details><summary> Configurer le réseau de votre VM en mode "Bridge"</summary>
 
-**ATTENTION** - Si vous configurez votre machine sur le <u>réseau WiFi de l'UTT, vous pourrez avoir du mal à vous connecter en mode "Bridge". Dans ce cas, restez plutôt en mode NAT.</u>
+**ATTENTION** - Si vous configurez votre machine sur le <u>réseau WiFi de l'UTT, vous ne pourrez pas vous connecter en mode "Bridge". Dans ce cas, restez en mode NAT.</u>
 
 + **Configuration** > **Réseau**
 + Mode d'accès réseau : **Accès par pont**
@@ -279,6 +286,9 @@ Pour cette raison, nous recommandons d'utiliser plutôt [le **mode "Bridge"**](h
 ![](img/instal/v2bridge.png)
 
 </details>
+
+</details>
+
 
 ##### III. Démarrer la VM
 <details>
@@ -294,8 +304,7 @@ Pour cette raison, nous recommandons d'utiliser plutôt [le **mode "Bridge"**](h
 <details><summary>
 Nous choisissons Alma Linux 9 pour notre exemple.
 
-
-L'installation d'Ubuntu Server 24.04 se déroule de manière similaire, mais l'installateur est un peu moins facile d'utilisation (navigation avec le clavier, etc).</summary>
+L'installation d'Ubuntu Server se déroule de manière très similaire, mais l'installateur est légèrement moins facile d'utilisation (navigation avec le clavier, etc). Pour l'installation d'Ubuntu Server, vous pouvez vous référer par exemple à [ce tutoriel](https://ubuntu.com/tutorials/install-ubuntu-server#1-overview).</summary>
 
 ##### I. Booter sur l'installateur
 <details>
@@ -329,9 +338,9 @@ L'installation d'Ubuntu Server 24.04 se déroule de manière similaire, mais l'i
         * [*Guest Agents*](https://www.virtualbox.org/manual/ch04.html) : installe des paquets spéciaux pour les Linux virtualisés - presse-papier partagé, possibilité de faire un glisser déposer, possibilité de partager des fichiers via l'hyperviseur ...
         * [*Remote Management for Linux*](https://www.linuxtricks.fr/wiki/administrer-sa-machine-avec-cockpit-fedora-red-hat-et-derivees) : `cockpit`, interface web de gestion et monitoring du serveur
 + **f. Vérifiez la configuration réseau**
-    - Si vous aviez choisi le mode "Bridge", vous devriez avoir une IP dans le même subnet que l'interface du système hôte connectée à Internet, et être capable de  `ping` cette IP depuis le système hôte.
+    - Si vous aviez choisi le mode "NAT", vous n'avez rien à faire. Votre VM a obtenu une IP automatiquement et peut se connecter à Internet.
+    - Si vous aviez choisi le mode "Bridge", vous devriez avoir une IP dans le même subnet que l'interface du système hôte connectée à Internet. Vérifiez que vous êtes capable de  `ping` cette IP depuis le système hôte.
         * ![](img/instal/l2frozo.png)
-    - Si vous avez **besoin de vous connecter à un réseau WiFi**, vous aurez sûrement besoin d'utiliser les **paramètres avancés pour renseigner un mot de passe ou des paramètres EAP**. Faites vous aider ou remettez le réseau de la VM en mode NAT.
     - Choisissez un nom d'hôte.
 + **g. (Optionnel) Disques et partitionnement**
     - Dans notre cas, ce n'est pas compliqué, nous avons seulement un disque virtuel, vierge, que nous utilisons en entier pour installer Linux. **Nous ne touchons donc pas aux paramètres par défaut**.
@@ -382,11 +391,13 @@ L'installation d'Ubuntu Server 24.04 se déroule de manière similaire, mais l'i
 + `sudo firewall-cmd --info-service cockpit` (affiche le port correspondant au service cockpit sur firewalld: `9090/tcp`)
 + `sudo firewall-cmd --add-service cockpit` (ouvre ce port sur le firewall - normalement, c'est déjà fait)
 
-Vous pouvez ensuite, avec un navigateur sur votre système hôte, vous rendre sur `<ip-vm>:9090` et vous connecter avec votre compte
++ Si votre VM est réseautée en mode NAT, vous aurez besoin de [**créer une règle de redirection de ports**](https://nsrc.org/workshops/2014/sanog23-virtualization/raw-attachment/wiki/Agenda/ex-virtualbox-portforward-ssh.htm) pour rendre le service accessible depuis votre système hôte.
+    - Redirigez le port de votre choix sur l'hôte, vers le port 9090 de la VM.
+    - Pour accéder au service depuis votre hôte, vous devrez vous rendre sur `localhost:<port-hôte>` avec votre navigateur
++ Si votre VM est réseautée en mode Bridge, rendez-vous avec votre navigateur sur `<ip-vm>:9090`
 
 ![](img/instal/cockpit.png)
 
-*Si votre VM est en mode NAT, vous aurez besoin d'une règle de redirection de port pour accéder à ses services.*
 </details>
 
 </details>
