@@ -147,6 +147,8 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
 ## 2.3.D - Config du resolver DNS (resolv.conf)
 <details><summary><code>/etc/resolv.conf</code> contient la config du resolver DNS</summary>
 
+![Exemple de /etc/resolv.conf](img/resolvconf.png)
+
 + Sa syntaxe est très simple et vous pouvez la modifier manuellement
     - `nameserver <ip>` : Adresse d'un serveur DNS. 3 maximum, du plus prioritaire au moins prioritaire.
     - `search <base-domain...>` : Domaines de recherche pour les noms courts.
@@ -175,6 +177,7 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
     - `sudo nc -l -p 636` : mode serveur, écoute sur 636/tcp
         * Très pratique pour tester si un pare-feu bloque un port entre le serveur et le client.
             * Ici, le client se connecterait avec `nc mons.lab-linux.local 636`
+        * ![](img/nc.png)
         * *NB : Il faut les droits d'admin pour écouter sur un port <1024*
     - `nc` n'est pas forcément installé sur votre système.
 + `curl` : envoi d'une requête à un serveur Web
