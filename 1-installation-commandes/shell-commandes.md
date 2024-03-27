@@ -629,6 +629,7 @@ D'autres commandes plus gadget :
 + En tant que *titi*, supprimez ce fichier, sans vous reconnecter sur son shell.
 + Supprimez *titi* et le groupe *amisimaginaires*.
 </details>
+</details>
 
 ## 1.2.4 Gestion des processus & ressources
 <details><summary>Tous les programmes gérés par le noyau s'exécutent sous la forme de <b>processus</b>. Il faut pouvoir suivre ces processus et les interrompre quand ça ne va pas.</summary>
