@@ -610,7 +610,6 @@ D'autres commandes plus gadget :
 + `/etc/shadow` : Fichier contenant les hash de mots de passe des comptes d'utilisateur. Accessible à `root` uniquement.
 
 </details>
-</details>
 
 ### Exercices : Gestion des utilisateurs & groupes
 <details>
