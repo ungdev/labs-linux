@@ -428,9 +428,10 @@ Bash se souvient des commandes que vous avez tapées précédemment.
 	- Ne contient pas les commandes actuellement en mémoire - seulement celles qui sont sauvegardées une fois que vous quittez le shell avec un `exit`.
 </details>  
 
-#### Pour aller plus loin avec Bash
+#### Pour aller plus loin
 <details>
 
+Aller plus loin avec Bash :
 + [Boucles](https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php)
 + Tests conditionnels
 	- [`if`, `test` et `[`](https://buzut.net/maitriser-les-conditions-en-bash/)
@@ -440,6 +441,7 @@ Bash se souvient des commandes que vous avez tapées précédemment.
 + [Personnalisation avec .bashrc](https://borntocode.fr/personnaliser-son-environnement-de-travail-sous-linux-grace-a-son-bashrc/) : enregistrer des variables, fonctions et alias de façon permanente
 + [Commentaires](https://linuxize.com/post/bash-comments/)
 
+[Zsh](https://linuxhandbook.com/why-zsh/) : non, c'est pas le shell de Zemmour, c'est un shell à la syntaxe proche de Bash mais avec plus de fonctionnalités !
 </details>
 
 </details>

@@ -5,7 +5,7 @@ Maintenant, deux solutions s'offrent à vous :
 
 Que choisissez-vous ?
 
-### 2.1.A Présentation du protocole
+### 2.1.1 Présentation du protocole
 <details><summary>SSH (<b>Secure SHell</b>) - est un protocole incontournable en administration système.</summary>
 
 Il permet à un **client SSH** de se connecter à un **serveur SSH** de manière <u>sécurisée</u> pour **exécuter des commandes**, **transférer des fichiers** ou encore monter des tunnels.
@@ -51,7 +51,7 @@ Le port standard sur lequel écoute un serveur SSH est le port **22/tcp**.
 
 ---
 
-### 2.1.B Côté serveur
+### 2.1.2 Côté serveur
 <details>
 
 + L'implémentation de serveur SSH la plus populaire est **`openssh-server`. Procurez-vous ce paquet**.
@@ -154,7 +154,7 @@ Vos objectifs sont :
 
 ---
 
-### 2.1.C Côté client
+### 2.1.3 Côté client
 <details>
 
 Le client OpenSSH est installé par défaut sur Windows, MacOS et la plupart des distributions Linux.
@@ -262,7 +262,7 @@ Sur Linux, il est fourni par le paquet `openssh-client` (Debian) / `openssh-clie
 
 ---
 
-### 2.1.D Pour aller plus loin
+### 2.1.4 Pour aller plus loin
 <details>
 
 + SSH pour faire des **tunnels** :

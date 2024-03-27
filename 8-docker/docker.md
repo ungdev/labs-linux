@@ -1,6 +1,6 @@
 # 8.1 - Introduction à l'architecture microservices
 
-## 8.1.0 Qu'est-ce qu'une architecture microservices
+## 8.1.1 Qu'est-ce qu'une architecture microservices
 
 <details><summary>Principe <b> général </b> d'une architecture microservices</summary>
 
@@ -24,7 +24,7 @@ Jusqu'à présent, nous avons principalement travaillé avec des applications mo
 
 > Nous allons voir dans les prochaines parties comment **Docker** peut vous aider à mettre en place une architecture microservices.
 
-## 8.1.1 Introduction à Docker
+## 8.1.2 Introduction à Docker
 
 Docker est une plateforme open-source qui permet de **développer**, **déployer**, et **exécuter** des applications dans des conteneurs. 
 
@@ -97,9 +97,25 @@ Voici une liste des commandes Docker les plus courantes :
 
 Pour plus d'informations sur les commandes Docker, vous pouvez consulter la documentation officielle : [https://docs.docker.com/engine/reference/commandline/docker/](https://docs.docker.com/engine/reference/commandline/docker/)
 
+#### Le fichier `Dockerfile`
+
+Le fichier `Dockerfile` est un fichier texte qui décrit comment construire une image Docker. Le `Dockerfile` contient une série d'instructions qui sont exécutées séquentiellement pour construire l'image.
+Liste des instructions les plus courantes :
+- `FROM` : Spécifie l'image de base.
+- `RUN` : Exécute une commande dans l'image.
+- `COPY` : Copie des fichiers dans l'image.
+- `WORKDIR` : Définit le répertoire de travail.
+- `EXPOSE` : Expose un port.
+- `CMD` : Spécifie la commande par défaut à exécuter.
+- ...
+
+Pour plus d'informations sur les instructions Dockerfile, vous pouvez consulter la documentation officielle : [https://docs.docker.com/engine/reference/builder/](https://docs.docker.com/engine/reference/builder/)
+
 </details>
 
-<details><summary>Exercices <b> très basique <\b> </summary>
+<details><summary>Exercices</summary>
+
+<details><summary>Exercice  <b> très basique </b> </summary>
 
 1. Lancer un conteneur Docker avec l'image `hello-world` :
    ```bash
@@ -117,20 +133,117 @@ Bon après cette courte introduction à Docker, nous allons voir comment Docker 
 
 </details>
 
-<details><summary>Exercices</summary>
+<details><summary>Exercice  <b> serveur web basique</b> </summary>
+
+Vous devez déployer un serveur web; avec **persistance des données.**  
+
+Pour cela on va utiliser deux principes de Docker : **les volumes et les réseaux.**  
+
+<details><summary>Réponse:</summary> 
+
+```bash
+$ docker run -d --name webserver -p 80:80 -v /path/to/your/html:/usr/share/nginx/html nginx
+```
+
+Les options utilisées dans cette commande sont les suivantes :
+- `-d` : Exécute le conteneur en arrière-plan.
+- `--name webserver` : Donne un nom au conteneur.
+- `-p 80:80` : Mappe le port 80 du conteneur sur le port 80 de l'hôte.
+- `-v /path/to/your/html:/usr/share/nginx/html` : Monte un volume pour persister les données du serveur web.
+
+</details>
+</details>
+
+<details><summary>Exercice <b> Images Docker </b> </summary>
+
+On va crée une image Docker à partir d'un conteneur existant.  
+
+**Objectif**: 
+* Crée un conteneur à partir de l'image `nginx`.
+* Ajoute un fichier `index.html` personnalisé.
+* Crée une image Docker à partir du conteneur.
+
+On peux utiliser la commande `docker commit` pour créer une image Docker à partir d'un conteneur existant.  
+La commande `docker exec` permet d'exécuter une commande dans un conteneur en cours d'exécution.
+
+<details><summary>Réponse:</summary>
+
+1. Créez un conteneur à partir de l'image `nginx` :
+   ```bash
+   $ docker run -d --name webserver nginx
+   ```
+2. Exécutez un shell interactif dans le conteneur :
+   ```bash
+   $ docker exec -it webserver /bin/bash
+   ```
+3. Ajouter un fichier `index.html` dans le répertoire `/usr/share/nginx/html` du conteneur :
+   ```bash
+   $ echo "Hello, World!" > /usr/share/nginx/html/index.html
+   ```
+4. Quittez le shell interactif :
+   ```bash
+   $ exit
+   ```
+5. Créez une image Docker à partir du conteneur `webserver` :
+   ```bash
+   $ docker commit webserver mynginx
+   ```
+6. Exécutez un conteneur à partir de l'image `mynginx` :
+   ```bash
+   $ docker run -d --name mywebserver -p 80:80 mynginx
+   ```
+7. Testez le serveur web en accédant à l'URL `http://localhost` dans votre navigateur.
+   Ou avec la commande `curl` :
+   ```bash
+   $ curl localhost
+   Hello, World!
+   ```
 
 </details>
 
-### Les bases de Docker Compose
+---
 
-<details><summary>Détails</summary>
+Vous allez maintenant apprendre à créer une image Docker à partir d'un fichier `Dockerfile` et à exécuter un conteneur Docker à partir de cette image.
 
-#### Les commandes de base
+**Objectif**:
+* Créez un fichier `Dockerfile` pour construire une image Docker personnalisée.
+* Construisez l'image Docker à partir de l'image de base `ubuntu`.
+* Installez un serveur web `nginx` dans l'image.
+* Mettre à jour le fichier `index.html` du serveur web.
+* Exécutez un conteneur à partir de l'image personnalisée.
 
+On peut utiliser la commande `docker build` pour construire une image Docker à partir d'un fichier `Dockerfile`.
 
+<details><summary>Réponse:</summary>
+
+1. Créez un fichier `Dockerfile` avec le contenu suivant :
+   ```Dockerfile
+   FROM ubuntu
+   RUN apt-get update && apt-get install -y nginx
+   COPY index.html /var/www/html/index.html
+   CMD ["nginx", "-g", "daemon off;"]
+   ```
+2. Créez un fichier `index.html` avec le contenu suivant :
+   ```html
+   <h1>Hello, World!</h1>
+   ```
+3. Construisez l'image Docker à partir du fichier `Dockerfile` :
+   ```bash
+   $ docker build -t mynginx .
+   ```
+   > Le point `.` à la fin de la commande indique que le `Dockerfile` se trouve dans le répertoire courant.
+4. Exécutez un conteneur à partir de l'image `mynginx` :
+   ```bash
+   $ docker run -d --name mywebserver -p 80:80 mynginx
+   ```
+5. Testez le serveur web en accédant à l'URL `http://localhost` dans votre navigateur.
+   Ou avec la commande `curl` :
+   ```bash
+   $ curl localhost
+   <h1>Hello, World!</h1>
+   ```
 
 </details>
 
-<details><summary>Exercices</summary>
-
+</details>
 </details>
