@@ -290,7 +290,7 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 Vous aurez besoin des paquets qui permettent la gestion d'un système de fichiers BTRFS, probablement nommés `btrfs-progs`.
 
 + Créez un disque virtuel de 5G et montez le sur un nouveau *loop device*
-	- *Indice: `man truncate`, `man losetup`
+	- *Indice: `man truncate`, `man losetup`*
 + Créez deux partitions de 2.5G et formattez-les avec le système de fichiers *BTRFS* de façon à simuler du RAID0 (mirroring des deux partitions)
 	- *Indice: `man mkfs.btrfs`*
 + Montez le système de fichiers en lecture seule sur `/mnt/butter`. Vous ne devez pas pouvoir créer un fichier dessus, même en temps que *root*.
@@ -322,7 +322,7 @@ Vous aurez besoin des paquets qui permettent la gestion d'un système de fichier
 	- Lorsqu'une connexion devient UP, il doit append l'heure dans le fichier `/opt/connection-up.log`
 	- Normalement, ça ne doit pas marcher. Qu'est-ce qui peut bien empêcher ce script de se lancer ? Résoudre le problème.
 
-<details><sumamry>Indices :</summary>
+<details><sumamry><i>Indices :</i></summary>
 
 - [Listening on uncommon ports with SELinux](https://www.rootusers.com/use-selinux-port-labeling-to-allow-services-to-use-non-standard-ports/)
 - [Serving uncommon files with Apache on an SElinux-enabled system](https://tecadmin.net/configure-selinux-for-apache-new-directory/)
@@ -740,7 +740,7 @@ Quand on débute, on a tendance à foncer chercher sur Internet et à oublier qu
 + Quelle option de `df` permet, par soucis de lisibilité, d'afficher la taille des systèmes de fichiers en KiloOctets, MegaOctets, GigaOctets ... plutôt que toujours en octets ?
 + À quoi sert la commande `lpr` ?
 + Quelle directive d'un timer systemd permet d'ajouter une composante aléatoire au timer ?
-	- *Indice: `apropos`, `grep -i`, `grep -i -C<n>`
+	- *Indice: `apropos`, `grep -i`, `grep -i -C<n>`*
 </details>
 </details>
 
