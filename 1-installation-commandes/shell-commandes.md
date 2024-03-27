@@ -529,6 +529,7 @@ D'autres commandes plus gadget :
 	- _Exemple : `tr '[a-z]' '[A-Z]'` mettra tous les caractères entre *"a"* et *"z"* en majuscules._
 + [`split` & `paste`](https://www.lessons2all.com/linux_split_paste_command.php) : scinder & joindre des fichiers
 </details>
+</details>
 
 ### Exercices : Shell et traitement de texte
 <details>
@@ -565,7 +566,6 @@ D'autres commandes plus gadget :
 + Utilisez `sed` pour afficher d'abord le numéro de port (sans le *"/tcp"*, *"/udp"* ...), pu`/etc/services`,
 + (Un peu plus difficile) Toujours avec `sed`, afficher dans la sortie de `man man`, uniquement le texte qui était entouré par des chevrons `<>`. Les chevrons eux-mêmes ne doivent pas s'afficher, seulement leur contenu, et les lignes qui ne contenaient pas de mots entre chevrons ne doivent pas non plus s'afficher.
 
-</details>
 </details>
 </details>
 
@@ -610,6 +610,7 @@ D'autres commandes plus gadget :
 + `/etc/shadow` : Fichier contenant les hash de mots de passe des comptes d'utilisateur. Accessible à `root` uniquement.
 
 </details>
+</details>
 
 ### Exercices : Gestion des utilisateurs & groupes
 <details>
@@ -628,7 +629,6 @@ D'autres commandes plus gadget :
 + Déconnectez-vous du shell de *titi*. Lisez le fichier avec votre utilisateur.
 + En tant que *titi*, supprimez ce fichier, sans vous reconnecter sur son shell.
 + Supprimez *titi* et le groupe *amisimaginaires*.
-</details>
 </details>
 
 ## 1.2.4 Gestion des processus & ressources
@@ -679,7 +679,8 @@ D'autres commandes plus gadget :
 	- Sans `nohup`, votre processus serait interrompu dès que vous quitteriez votre shell ou perdez votre connexion au serveur.
 	- Exemple : `nohup bash make-backup.sh &` 
 	- *NB : `tmux` fait la même chose.*
-  
+</details>
+
 ### Exercices : Gestion des processus et des ressources
 <details>
 
@@ -709,8 +710,6 @@ D'autres commandes plus gadget :
 + Créez une *fork bomb* en une seule ligne de bash.
 
 </details>
-
-</details>
 </details>
 
 ## 1.2.5 Obtenir de l'aide
@@ -730,6 +729,8 @@ D'autres commandes plus gadget :
 Quand on débute, on a tendance à foncer chercher sur Internet et à oublier que de l'aide en lignes de commandes existe. Habituez-vous à utiliser l'aide en ligne de commandes, qui peut apporter des réponses précises et rapides.
 
 
+</details>
+
 ### Exercices : obtenir de l'aide
 <details>
 
@@ -740,7 +741,6 @@ Quand on débute, on a tendance à foncer chercher sur Internet et à oublier qu
 + À quoi sert la commande `lpr` ?
 + Quelle directive d'un timer systemd permet d'ajouter une composante aléatoire au timer ?
 	- *Indice: `apropos`, `grep -i`, `grep -i -C<n>`
-</details>
 </details>
 </details>
 
