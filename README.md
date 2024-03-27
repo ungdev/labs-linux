@@ -1,7 +1,7 @@
 <div style="text-align: center"><h1>Atelier UNG - Labs Linux</h1></div>
 
-## Somaire
-- [Somaire](#somaire)
+## Sommaire
+- [Sommaire](#sommaire)
 - [Présentation de l'atelier UNG](#présentation-de-latelier-ung)
 - [Déroulement des sessions](#déroulement-des-sessions)
 - [Règlement](#règlement)
