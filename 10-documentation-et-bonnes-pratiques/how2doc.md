@@ -73,7 +73,7 @@ Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hés
     - Exemples :
         * `III.1.B.a)` : Forte insistance sur la hiérarchie des parties. `III` est une giga-macro-partie, `a)` est le dernier niveau de détails. 
         * `3.1.2.A` : Très bien pour un document à la structure sémantique plus aplatie.
-+ User et abuser des nested lists. Premier niveau : `+`
++ User et abuser des listes imbriquées. Premier niveau : `+`
     - Deuxième niveau: `-`
         * Troisième niveau et plus : `*`
 + Les lignes de commande et fichiers de config doivent toujours être entre **backticks** (\`) ou **triple-backticks** (\`\`\`). Si du syntax highlighting est possible, l'utiliser.
