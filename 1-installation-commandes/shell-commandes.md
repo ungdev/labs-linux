@@ -1,5 +1,5 @@
 # 1.2 - Commandes de base
-<img src=img/hackerman.png style=float:right; width=15%>
+<img src=img/hackerman.png align=right; width=15%>
 Tuto niveau débutant à intermédiaire. On a quand même mis quelques exercices corsés pour ceux qui commencent à toucher leur bille.
 
 Il y a beaucoup de commandes alors **n'essayez pas de tout apprendre par cœur** - voyez le plutôt comme une *"cheatsheet"*. On vous conseille de lire ce qui vous intéresse, faire les exercices et revenez voir les commandes si vous avez un doute.
