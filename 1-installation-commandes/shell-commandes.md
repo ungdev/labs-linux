@@ -21,7 +21,7 @@ Que ce soient les comptes d'utilisateurs, la configuration de votre shell, votre
 
 <details><summary>Les fichiers et répertoires sont gérés par des <b>systèmes de fichiers</b> (<i>File Systems</i>).</summary>
 
-<img src=img/sw-paths.png width=20% align=right>
+<img src=img/sw-paths.png width=25% align=right>
 
 Un FS est une couche logique qui opère par dessus une partition d'un périphérique de stockage.
 
@@ -51,7 +51,7 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 #### Commandes de gestion de l'arborescence
 <details><summary><b>Commandes pour manipuler l'arborescence du système</b></summary>
 
-<img src=img/lscdpwd.jpg width=20% align=right>
+<img src=img/lscdpwd.jpg width=25% align=right>
 
 + `pwd` : afficher le chemin du **dossier courant**
 + `ls` : **lister le contenu du dossier** courant.
@@ -131,7 +131,7 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 ### Permissions
 <details><summary>Les fichiers et répertoires sont associés à des <b>permissions</b> à des fins de contrôle d'accès.</summary>
 
-<img src=img/touch-woman.jpeg width=20% align=right>
+<img src=img/touch-woman.jpeg width=25% align=right>
   
 + Les permissions possibles sont :
     - `r` : __*read*__
