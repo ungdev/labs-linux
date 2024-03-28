@@ -77,12 +77,13 @@ Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hés
     - Deuxième niveau: `-`
         * Troisième niveau et plus : `*`
 + Les lignes de commande et fichiers de config doivent toujours être entre **backticks** (\`) ou **triple-backticks** (\`\`\`). Si du syntax highlighting est possible, l'utiliser.
-    - **Pas de screens des commandes et fichiers de config** - il faut pouvoir tout copier-coller - à moins que ce soit vraiment pour illustrer avec un exemple ou montrer le résultat d'une commande.
+    - <u>**Pas de screens des commandes et fichiers de config**</u> - il faut pouvoir tout copier-coller - à moins que ce soit vraiment pour illustrer avec un exemple ou montrer le résultat d'une commande.
     - Quand la forme générique d'une ligne de commandes est compliquée, donner un exemple. 
         * *Par exemple, si j'explique `nmcli c[onnection] m[odify] <conn> set <setting> <value>`, je peux donner l'exemple `nmcli c m "Ethernet 1" set ipv4.dns "8.8.8.8 8.8.4.4"`*
 + Mettre autant de **cross-references** que possible (liens vers une une autre partie de la doc / vers une autre doc)
 + Mettre en gras ou souligner les passages importants. Mettre en italique les passages "bonus".
     - Quand une manip est risquée, le signaler de manière bien visible, par exemple : **!-- ATTENTION --!**
 + Utiliser les balises `<details>` et `<summary>` pour faire des sections dépliantes quand on veut donner une explication, une justification, ou tout autre encart qui "coupe" la lecture.
++ Pour citer la doc officielle, des paroles ou des conseils reçus : utiliser une *blockquote* : `>`
 
 </details>
