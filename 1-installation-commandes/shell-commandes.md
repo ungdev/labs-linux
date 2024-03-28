@@ -537,7 +537,7 @@ Nous allons survoler les commandes les plus utiles pour travailler avec du texte
 
 + [`sort`](https://www.redhat.com/sysadmin/sort-command-linux) : **trier** les lignes
 	- *Exemple : `ls -l | sort -n -k5`  : contenu du dossier, trié par taille croissante*
-+ [**`sed`**]**(https://quickref.me/sed.html) : traitement de texte avancé par expressions régulières. **Incontournable**.
++ [**`sed`**](https://quickref.me/sed.html) : traitement de texte avancé par expressions régulières. **Incontournable**.
 	- _Exemple : `sed '1,$s/:/|/g'` remplace les *":"* par des *"|"* sur la première et la dernière ligne._
 + [xargs](https://www.malekal.com/comment-utiliser-commande-xargs-exemples/) : convertir l'entrée standards en arguments à passer à une commande
 
