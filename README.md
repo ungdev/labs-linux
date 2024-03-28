@@ -32,7 +32,7 @@ Tu peux évidemment bosser sur ce Wiki **en autonomie**, tout seul dans ton coin
 + Cela te permettra d'aider et de te faire aider
 + Nous assurerons ta sécurité pendant que tu débattras de la meilleure distribution Linux ou du meilleur Desktop Environment
 + Tu pourras échanger sur les thématiques proposées et aller plus loin
-+ Et si tu n'as pas d'amis cela te fera au moins un semblant de moment social, bref viens !</details>
++ Et si tu n'as pas d'amis cela te fera au moins un semblant de vie sociale, bref viens !</details>
 
 <br/>
 
