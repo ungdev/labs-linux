@@ -19,7 +19,9 @@ Notre objectif est de centraliser et codifier la doc, pour qu'elle garde une cer
 | COHÉRENCE | **Après toute modification**, à la cohérence de l'ensemble tu veilleras.
 | EXPLICATIONS, EXEMPLES & ILLUSTRATIONS | Lorsque l'évidence de tes enseignements douteuse te paraîtra, des **explications, exemples, schémas ou captures d'écran** tu fourniras.
 | RÉFÉRENCES | À la **qualité et à la pérennité de tes références** tu veilleras.
-| SÉCURITÉ | Des **secrets** du SIA tu ne révèleras aucun. |
+| SÉCURITÉ | Des **secrets** du SI tu ne révèleras aucun. |
+
+Et bien sûr, mais c'était évident et surtout ça faisait 11 si je le mettais dans le tableau, tu n'oublieras pas de signer ta doc en indiquant tes coordonnées de contact et éventuellement celle des autres personnes concernées.
 
 ## 10.1.2 Structure type
 Par soucis de cohérence, chaque doc doit, dans les grandes lignes, suivre le plan suivant. 
