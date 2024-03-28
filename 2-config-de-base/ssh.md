@@ -233,7 +233,7 @@ Sur Linux, il est fourni par le paquet `openssh-client` (Debian) / `openssh-clie
 </details>
 
 #### Transfert de fichiers via SSH avec SCP et Rsync
-<details><summary>SSH permet d'envoyer facilement des fichiers entre deux hôtes distants, de manière sécurisée.</details>
+<details><summary>SSH permet d'envoyer facilement des fichiers entre deux hôtes distants, de manière sécurisée.</summary>
 
 + `scp /path/to/fichier/local [user@]<host>:/path/to/fichier/distant` : copie du local vers le distant
     - *E.g. `scp ~/Downloads/ca.crt mons:/usr/local/share/ca-certificates/`*
