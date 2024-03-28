@@ -21,7 +21,7 @@ On a tout de même essayé de pousser un peu le niveau de détails pour que mêm
     - [1.2.4 Gestion des processus & ressources](shell-commandes.md#124-gestion-des-processus---ressources)
     - [1.2.5 Obtenir de l'aide](shell-commandes.md#125-obtenir-de-laide)
 
-<details><summary>*Contact : *</summary>
+<details><summary>*Contributeurs : *</summary>
     
 + *Félix Houdebert [felix.houdebert@utt.fr](mailto:felix.houdebert@utt.fr)*
 </details>
