@@ -16,7 +16,7 @@
 <ul>
     <li>Que tu n'aies jamais entendu parler de Linux...</li>
     <li>Que tu commences doucement à toucher ta bille...</li>
-    <li>Ou que tu te fasses servir, tous les matins, ton café par un cronjob qui se connecte, après avoir traversé un équilibreur de charge <i>keepalived</i>, à l'un de tes deux Raspberry Pi sous Gentoo via SSH à travers un tunnel IPSec IKEv2 qui vous authentifie auprès d'un serveur RADIUS afin de lancer un conteneur LXC,</li>
+    <li>Ou que tu te fasses servir, tous les matins, ton café par un cronjob qui se connecte, après avoir traversé un équilibreur de charge <i>keepalived</i>, à l'un de tes deux Raspberry Pi sous Gentoo via SSH à travers un tunnel IPSec IKEv2 qui t'authentifie auprès d'un serveur RADIUS afin de lancer un conteneur LXC,</li>
 </ul>
 Tu es le bienvenu. Par ailleurs, si tu n'es pas en ISI/RT mais que tu es curieux de découvrir Linux, que tu cherches à augmenter ton sex-appeal en apprenant à éteindre ton PC en lignes de commandes ou que tu es tout simplement perdu, reste parmi nous : c'est aussi pour toi.</details> 
 <br/>
