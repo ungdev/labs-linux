@@ -6,7 +6,7 @@ La doc du SI précédent était devenue chaotique. On a donc souhaité profiter 
 
 Notre objectif est de centraliser et codifier la doc, pour qu'elle garde une certaine cohérence et reste utilisable sur le long terme. Voilà pourquoi nous écrivons cette "doc de la doc".
 
-## 10.1.0 Les dix commandements
+## 10.1.1 Les dix commandements
 
 |                          |                                                                                                                                                                        |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -21,7 +21,7 @@ Notre objectif est de centraliser et codifier la doc, pour qu'elle garde une cer
 | RÉFÉRENCES | À la **qualité et à la pérennité de tes références** tu veilleras.
 | SÉCURITÉ | Des **secrets** du SIA tu ne révèleras aucun. |
 
-## 10.1.1 Structure type
+## 10.1.2 Structure type
 Par soucis de cohérence, chaque doc doit, dans les grandes lignes, suivre le plan suivant. 
 
 Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hésiter à split en plusieurs fichiers.
@@ -63,7 +63,7 @@ Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hés
 
 </details>
 
-## 10.1.2 Considérations de forme
+## 10.1.3 Considérations de forme
 <details>
 
 + La doc doit être rédigée en **Markdown**.
