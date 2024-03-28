@@ -4,6 +4,43 @@ Vous êtes potentiellement intéressés par des màj de sécurité et des correc
 
 C'est pour les feignants comme vous qu'on a des gestionnaires de paquets.
 
+<details>
+
+<img src=img/delivery-guy.jpg style=float:right width=17%>
+
++ Un **paquet** (*package*) est une archive qui contient à lui seul les données et les instructions nécessaires pour installer un programme, une *library*, voire un kernel ou un module de kernel.
+    - Debian utilise des `.deb` ...
+    - RHEL utilise des `.rpm`...
+
+<br/>
+
++ Un **gestionnaire de paquets** est un utilitaire qui permet d'**installer, supprimer et mettre à jour** des paquets.
++ Un gestionnaire de paquets un minimum élaboré vous permet aussi de **chercher et télécharger** ces paquets en ligne, et s'assure de la **cohérence de l'ensemble** :
+    - Gestion des **conflits**
+        * *Par exemple, deux variantes différentes du programme `awk` sont incompatibles. Pour éviter que celle que vous cherchiez à installer n'écrase l'ancienne, le gestionnaire de paquets vous prévient et vous demande de choisir.*
+    - Gestion des **dépendances**
+        * *Par exemple, le paquet `lolcat` a besoin du paquet `ruby`. Si le paquet `ruby` n'est pas installé, le gestionnaire de paquets ira le chercher automatiquement pour que `lolcat` ait tout ce dont il a besoin.*
+
+<br/>
+
++ Ces gestionnaires de paquets avancés obtiennent les paquets à partir d'un **dépôt** (*repository* ou *repo*) distant, qui n'est autre qu'un serveur de fichier qui met à disposition les paquets et des métadonnées les concernant.
+
+<br/>
+
+En utilisant le gestionnaire de paquets fourni par votre distribution et ses dépôts officiels, vous aurez accès à **presque tous les paquets dont vous aurez besoin**, et pourrez les **mettre à jour facilement**. 
+
+<img style="vertical-align:middle"  src=img/update-os.jpeg height=300px> *Crois-moi, une fois que tu maîtrises ton gestionnaire de paquets, l'expérience d'installation et de mise à jour est bien plus agréable que sur Windows.*
+
+<details><summary>Et si jamais vous ne trouvez pas tout de suite le paquet dont vous avez besoin, il existe toujours d'autres moyens d'obtenir un paquet...</summary>
+
++ Ajouter de nouveaux repos au gestionnaire de paquets pour qu'il puisse trouver le nouveau paquet
++ Se procurer le paquet soi-même, ainsi que ses dépendances, et tout installer à la mano
++ Se procurer le code source et le compiler soi-même
++ Utiliser d'autres gestionnaires de paquets avec leurs propres repos
+
+</details>
+</details>
+
 ### RHEL
 On utilise l'utilitaire `dnf`.
 
@@ -123,6 +160,7 @@ Les repos les plus populaires peuvent aussi s'installer comme des paquets :
 + Affichez la date et l'heure
 
 <details><summary><i>Indices :</i></summary>
+<img src=img/darwin.png height=300px>
 
 *Démerde toi !*
 </details>
@@ -135,9 +173,9 @@ Les repos les plus populaires peuvent aussi s'installer comme des paquets :
 ### Debian
 On utilise le gestionnaire de paquets `apt`
 
-Avec `apt`, avant de chercher, installer et mettre à jour des paquets, **il faut d'abord mettre à jour manuellement son index de paquets** : `sudo apt[-get] update`. `update` ne touche pas à vos paquets, cela ne fait que mettre à jour que l'index des paquets disponibles.
+<details><summary>Avec <code>apt</code>, avant de chercher, installer et mettre à jour des paquets, <b>il faut d'abord mettre à jour manuellement son index de paquets</b> avec un <b><code>sudo apt-get update</code></b>.</summary>
 
-<details>
+(Même si le nom de la commande peut prêter à confusion, `sudo apt[-get] update`. `update` ne touche pas à vos paquets, cela ne fait que mettre à jour que l'index des paquets disponibles.)
 
 ##### Chercher, Lister
 + `apt[-cache] search <package>` : chercher dans le nom / la description du paquet
@@ -155,6 +193,8 @@ Avec `apt`, avant de chercher, installer et mettre à jour des paquets, **il fau
 + `dnf group list --available` : collections de paquets disponibles
 
 ##### Mettre à jour
+<img src=img/aptupdate-nonstop.png width=30% style=float:right>
+
 + `sudo apt[-get] -s upgrade [package...]` : vérifier s'il y a des mises à jour
     - (`-s` = `--simulate`)
 + `sudo apt[-get] upgrade [package...]` : mettre à jour tout / des paquets en particulier **sans supprimer les paquets devenus obsolètes**
@@ -210,6 +250,7 @@ Avec `apt`, avant de chercher, installer et mettre à jour des paquets, **il fau
 
 #### Pour aller plus loin
 <details>
+<img src=img/apt-prettystabletho.png width=20% style=float:right>
 
 + [`dpkg`](https://www.cyberciti.biz/howto/question/linux/dpkg-cheat-sheet.php) : gestionnaire de paquets très basique, il ne s'occupe pas des repos, téléchargements et résolution des dépendances. Equivalent de `rpm` sur RHEL.
     - Installation de paquets téléchargés manuellement
@@ -218,6 +259,7 @@ Avec `apt`, avant de chercher, installer et mettre à jour des paquets, **il fau
     - Teams, Spotify, Slack, WhatsApp, Zoom...
 + [`make`](https://www.makeuseof.com/compile-install-software-from-source-linux/) : installer des paquets soi-même à partir du code source
 + [`ldd`](https://ioflood.com/blog/ldd-linux-command/) : trouver les librairies dont dépend un éxécutable
+
 
 </details>
 

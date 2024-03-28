@@ -127,6 +127,8 @@ Tl;dr :
             * Si un nouveau driver promettant d'améliorer drastiquement les performances de votre carte graphique est sorti, mais qu'il n'a pas encore été approuvé par les gestionnaires de votre dépôt, vous devrez l'installer par vos propres moyens ou attendre 6 mois qu'il soit intégré au dépôt de votre distribution.
     - À l'inverse, <u>une distribution qui ne se vante pas d'être stable vous proposera fréquemment des mises à jour et vous donnera un accès facile aux derniers paquets</u>. En revanche, vous avez plus de risques de connaître des bugs après une mise à jour.
     - Les **entreprises et les administrateurs de serveurs** ont donc naturellement tendance à privilégier les distributions **stables**, là où ce peut être frustrant pour un utilisateur de PC qui préfèrera souvent une distribution plus réactive.
+  
+![](img/stabilité.png)
 
 + Il y a deux **modèles de "releases"** pour la mise à jour des dépôts :
     - Les [**_point_** releases](https://vanillaos.org/blog/article/2023-01-31/point-vs-rolling-release-and-the-modern-solutions), ou *periodic* releases

@@ -11,17 +11,21 @@ Il y a beaucoup de commandes alors **n'essayez pas de tout apprendre par cœur**
 ## 1.2.1 Gestion des fichiers
 
 ### Systèmes de fichiers
-<details><summary>Sur Linux, <b>tout est fichier</b>.</summary>
+<details><summary>Sur Linux, <i>"tout est fichier"</i>.</summary>
 
-Que ce soient les comptes d'utilisateurs, la configuration de votre shell, votre clavier ou votre connexion avec un serveur distant, tout est représenté par des fichiers.
+<img src=img/everything-a-file.jpg width=20%>
+
+Que ce soient les comptes d'utilisateurs, la configuration de votre shell, votre clavier ou votre connexion avec un serveur distant, presque tout est représenté par des fichiers.
 
 </details>
 
 <details><summary>Les fichiers et répertoires sont gérés par des <b>systèmes de fichiers</b> (<i>File Systems</i>).</summary>
 
-Un FS est une couche logique qui opère par dessus une partition d'un périphérique de stockage. 
+<img src=img/sw-paths.png width=20% style=float:right>
 
-Son rôle principal est d'organiser vos données dans une structure logique arborescente, qui vous permet de les désigner par des **chemins**.
+Un FS est une couche logique qui opère par dessus une partition d'un périphérique de stockage.
+
+Son rôle principal est d'organiser vos données dans une structure logique arborescente, qui vous permet de les désigner par des **chemins** délimités par des *slashes* `/` (là où Windows utilise des *antislashes* `\`).
 
 Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) sur ces données, vérifier leur intégrité, prendre des instantanés à des fins de sauvegarde ... et bien d'autres encore. 
 
@@ -46,6 +50,8 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 
 #### Commandes de gestion de l'arborescence
 <details><summary><b>Commandes pour manipuler l'arborescence du système</b></summary>
+
+<img src=img/lscdpwd.jpg width=20% style=float:right>
 
 + `pwd` : afficher le chemin du **dossier courant**
 + `ls` : **lister le contenu du dossier** courant.
@@ -75,9 +81,9 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 + `rm` : __*remove*__
 	- **<u>!-- ATTENTION --!</u>**, commande dangereuse. Les éléments supprimés ne sont pas placés dans une corbeille, ils sont perdus définitivement.
 	- `rm <fichier...>`
-	- `rm -r <dossier...>` : supprime les dossiers et leur contenu
-	- Pour ne pas demander de confirmation, `-f`
-		* `rm -rf titi`
+	- `rm -r <dossier...>` : (*recursive*) supprime les dossiers et tout leur contenu
+    	* Pour ne pas demander de confirmation : `rm -rf`
+		* <img src=img/rm-fr.png width=20%> ou `rm -fr`
 	- Vous pouvez sélectionner les fichiers et dossiers avec un *wildcard* :
 		* `?` : n'importe quel caractère
 		* `*` : n'importe quelle chaîne de caractères
@@ -125,6 +131,8 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 ### Permissions
 <details><summary>Les fichiers et répertoires sont associés à des <b>permissions</b> à des fins de contrôle d'accès.</summary>
 
+<img src=img/touch-woman.jpeg width=20% style=float:right>
+  
 + Les permissions possibles sont :
     - `r` : __*read*__
     - `w` : __*write*__, le droit de modifier ou supprimer.
@@ -168,9 +176,15 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 </details>
 </br>
 
-+ L'utilisateur `root` peut passer outre les permissions. Il a **tous les droits sur le système**. L'administreur peut temporairement agir en temps que `root` en préfixant votre commande par **`sudo`** - mais, il fait alors très attention à ce qu'il fait !
-	- Exemple : `sudo cat /etc/shadow`
-	- Réfléchissez avant d'exécuter des commandes avec `sudo`. Par exemple, `sudo rm -rf /` supprimerait TOUTE l'arborescence du système.
+<detail><summary>L'utilisateur <b><code>root</code> peut passer outre les permissions</b>. Il a <b>tous les droits sur le système</b>. L'administreur peut temporairement agir en temps que <code>root</code> en préfixant sa commande par <b><code>sudo</code></b>.
+
+- Exemple : `sudo cat /etc/shadow`
+- Toujours <u>**faire gaffe</u>. avant d'exécuter des commandes avec `sudo`**
+	* Par exemple, `sudo rm -rf /` supprimerait définitivement TOUTE l'arborescence du système.
+	* ![](img/sudo-whatever.jpeg)
+- D'un autre côté, tant que vous n'utilisez pas `sudo`, il ne peut rien vous arriver de grave.
+
+</details>
 
 #### Commandes de gestion des permissions
 <details>
@@ -371,6 +385,7 @@ Pour les tâches avancées, on fait appel à d'autres programmes que l'on lance 
   - `macommande >> output.txt` : redirige *stdout* dans un fichier. S'il existe déjà, **ajoute** le résultat à son contenu.
   - `macommande 2> err.txt` : redirige la sortie d'erreur dans un fichier.
   - `macommande 2>/dev/null` : `/dev/null` est un fichier spécial qui sert de "trou noir" - la sortie d'erreur disparaît tout simplement.
+	* <img src=img/devnull.png width=20%>
   - `macommande 2&>1 >/dev/null` : Redirige le descripteur `2` vers `1`, et `1` vers `/dev/null`. En gros, et *stdout* et *stderr* disparaissent, pour une commande totalement silencieuse.
 + `macommande < input.txt` : lit les données d'entrée à partir d'un fichier au lieu de les lire interactivement.
   - `macommande <<< "les chaussettes de l'archiduchesse sont elles sèches ? Je sais pas mais en tout cas elles fouettent vachement"` : input à partir d'un texte passé directement à la ligne de commande plutôt qu'un fichier

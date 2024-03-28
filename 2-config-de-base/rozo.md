@@ -20,8 +20,12 @@
 ### Configuration statique ou dynamique
 <details>
 
+<img src=img/serveur-dhcpniet-staticyep.jpg height=300px style=float:right;>
+
 + Si vous n'avez pas à configurer ces paramètres à chaque fois que vous vous connectez sur un nouveau réseau avec votre PC, c'est grâce au **DHCP** (*Dynamic Host Configuration Protocol*, parfois aussi connu à tort sous l'appellation *Dark-green Hot Chili Peppers*). Lorsque votre PC rejoint un nouveau réseau, il contacte automatiquement son serveur DHCP pour obtenir ses paramètres réseau : on parle alors **d'adressage dynamique**.
     - *Chez vous, le serveur DHCP tourne généralement sur votre box.*
+  
+
 + En revanche, **pour des serveurs, on préfère l'adressage statique**. On fournit donc tous ces paramètres manuellement.
     - Votre serveur ne va à priori pas se déplacer sur d'autres réseaux
     - On aime bien choisir nous-mêmes son adresse IP, et être sûrs qu'elle ne changera pas.
@@ -31,6 +35,8 @@
 
 ## 2.3.2 - Config manuelle temporaire avec iproute2
 <details><summary>La commande <code>ip</code> vous permet d'inspecter et modifier manuellement votre config réseau. Les modifications sont <b>temporaires</b>.</summary>
+
+<img src=img/chad-du-rozo.png style=float:right height=300px>
 
 + `ip address` : affiche les paramètres de niveau 2 et 3 pour toutes vos interfaces
     - `ip a` : raccourci
@@ -79,6 +85,7 @@
 
 ## 2.3.3 - Config persistente avec NetworkManager
 <details><summary><i>NetworkManager</i> est un <i>daemon</i> de configuration réseau qui est en train de devenir la méthode de configuration préférée de la plupart des distributions.</summary>
+<img src=img/nm-logo.png style=float:right>
 
 Il définit et gère des profils de configuration qui s'appellent des **connexions**.
 
@@ -165,6 +172,8 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
 ## 2.3.5 - Outils de dépannage
 <details><summary>Quelques outils qui peuvent s'avérer pratiques pour quand Google est cassé...</summary>
 
+<img src=img/redémarrer-box.jpg width=20% style=float:right>
+
 + `ping` : test de connectivité IP - **la base pour tester la couche 3**
     - `-6` : IPv6
     - `-I` : Interface source
@@ -199,7 +208,22 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
     - Souvent pas installé par défaut
 + `iptraf` : Statistiques d'utilisation TCP/IP, sur un menu interactif facile à utiliser.
     - Non installé par défaut
-  
+
+<br/>
+<img src=img/nonetworkproblem.png height=500px; style=float:right;vertical-align:middle>
+
+*Vous risquez de rencontrer des gens qui vous diront de ne jamais accuser le réseau :*
++ *T'avais pas rentré la bonne IP ?*
+    - *C'était un problème de config.*
++ *Le routeur déconnaît ?*
+    - *C'était un problème système.*
++ *La NAT posait un soucis ?*
+    - *C'était un problème de conception.*
++ *La fibre était pétée ?*
+    - *C'était un problème physique.*
+
+*Ces gens ont raison. Il n'y a JAMAIS de problèmes réseau.*
+
 </details>
 
 ## Exercices
