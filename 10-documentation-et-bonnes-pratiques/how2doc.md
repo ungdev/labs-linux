@@ -6,7 +6,6 @@ La doc du SI précédent était devenue chaotique. On a donc souhaité profiter 
 
 Notre objectif est de centraliser et codifier la doc, pour qu'elle garde une certaine cohérence et reste utilisable sur le long terme. Voilà pourquoi nous écrivons cette "doc de la doc".
 
-
 ## Les dix commandements
 
 |                          |                                                                                                                                                                        |
