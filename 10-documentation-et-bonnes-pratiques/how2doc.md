@@ -1,4 +1,4 @@
-<div style=align:center><h1>How To Doc ?</div>
+<div style=align:center><h1>10.1 - How To Doc ?</div>
 
 <img src=img/bonnedoc-mauvaisedoc.png align=right height=400px>
 
@@ -6,7 +6,7 @@ La doc du SI précédent était devenue chaotique. On a donc souhaité profiter 
 
 Notre objectif est de centraliser et codifier la doc, pour qu'elle garde une certaine cohérence et reste utilisable sur le long terme. Voilà pourquoi nous écrivons cette "doc de la doc".
 
-## Les dix commandements
+## 10.1.0 Les dix commandements
 
 |                          |                                                                                                                                                                        |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -21,7 +21,7 @@ Notre objectif est de centraliser et codifier la doc, pour qu'elle garde une cer
 | RÉFÉRENCES | À la **qualité et à la pérennité de tes références** tu veilleras.
 | SÉCURITÉ | Des **secrets** du SIA tu ne révèleras aucun. |
 
-## Structure type
+## 10.1.1 Structure type
 Par soucis de cohérence, chaque doc doit, dans les grandes lignes, suivre le plan suivant. 
 
 Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hésiter à split en plusieurs fichiers.
@@ -63,11 +63,16 @@ Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hés
 
 </details>
 
-## Considérations de forme
+## 10.1.2 Considérations de forme
 <details>
 
 + La doc doit être rédigée en **Markdown**.
     - Vous pouvez utiliser des balises HTML si besoin.
++ **Numéroter les parties** et sous-parties.
+    - Rester cohérent tout au long de la doc.
+    - Exemples :
+        * `III.1.B.a)` : Insistance sur la hiérarchie des parties. `III` est une giga-macro-partie, `a)` est le dernier niveau de détails. 
+        * `3.1.2.A` : Très bien pour un document à la structure sémantique plus aplatie.
 + User et abuser des nested lists. Premier niveau : `+`
     - Deuxième niveau: `-`
         * Troisième niveau et plus : `*`
