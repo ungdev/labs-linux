@@ -28,20 +28,20 @@ Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hés
 
 <details>
 
-+ **Intro**
++ **README**
     - Brève présentation du projet
     - But
     - Auteurs et personnes concernées avec leurs coordonnées de contact
 + **Sommaire**
-+ *(Facultatif)* **Vue d'ensemble**
++ *(Facultatif)* **I. Vue d'ensemble**
     - Par exemple, pour un projet en lien avec l'infra réseau, un gros schéma récapitulatif de l'archi logique avec les IP, un schéma de l'archi physique ...
     - Expliquer le fonctionnement du service, son architecture, le rôle de chacun de ses composants ...
-+ *(Facultatif)* **Choix de la solution**
++ *(Facultatif)* **II. Choix de la solution**
     - Expliquer pourquoi cette solution avait été choisie par rapport à d'autres
-+ **Déploiement**
++ **III. Déploiement**
     - Pour un service, comment le déployer à l'identique
     - Pour un projet d'infra, comment il a été mis en place dans le détail, de la commande à la configuration en passant par l'installation.
-+ **Administration**
++ **IV. Administration**
     - Procédures pour la vie de tous les jours de la solution, quand tout va bien :
         * Comment ajouter un nouvel utilisateur...
         * Comment faire une mise à jour ...
@@ -49,7 +49,7 @@ Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hés
         * Comment activer telle feature...
         * Comment modifier les principaux paramètres...
             * *Ne pas détailler les paramètres osef, seulement ceux que l'on peut avoir besoin de modifier*
-+ **Maintenance et dépannage**
++ **V. Maintenance et dépannage**
     - Erreurs fréquentes et comment les régler
     - Procédures à suivre en cas d'incident
         * Il faut imaginer quels incidents peuvent arriver, et détailler la procédure à mettre en œuvre pour les résoudre. Cette procédure doit être testée.
