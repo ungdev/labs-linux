@@ -71,7 +71,7 @@ Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hés
 + **Numéroter les parties** et sous-parties.
     - Rester cohérent tout au long de la doc.
     - Exemples :
-        * `III.1.B.a)` : Insistance sur la hiérarchie des parties. `III` est une giga-macro-partie, `a)` est le dernier niveau de détails. 
+        * `III.1.B.a)` : Forte insistance sur la hiérarchie des parties. `III` est une giga-macro-partie, `a)` est le dernier niveau de détails. 
         * `3.1.2.A` : Très bien pour un document à la structure sémantique plus aplatie.
 + User et abuser des nested lists. Premier niveau : `+`
     - Deuxième niveau: `-`
