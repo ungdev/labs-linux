@@ -80,6 +80,6 @@ Voici la liste des thématiques actuellement disponibles et à venir:
 * Félix Houdebert, pour l'aide à l'écriture des labs
 * Ann Neveu, pour les visuels
 * Alban Souchard, le président de l'UNG, et la communication
-* Noe Charlier, pour les idées
+* Noë Charlier, pour les idées
 * Guillaume Etheve, pour l'aide, et les idées
 * Et tous les autres membres de l'UNG qui ont participé à ce projet !
