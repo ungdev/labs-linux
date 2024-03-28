@@ -20,7 +20,7 @@
 ### Configuration statique ou dynamique
 <details>
 
-<img src=img/serveur-dhcpniet-staticyep.jpg height=300px style=float:right;>
+<img src=img/serveur-dhcpniet-staticyep.jpg height=300px align=right ;>
 
 + Si vous n'avez pas à configurer ces paramètres à chaque fois que vous vous connectez sur un nouveau réseau avec votre PC, c'est grâce au **DHCP** (*Dynamic Host Configuration Protocol*, parfois aussi connu à tort sous l'appellation *Dark-green Hot Chili Peppers*). Lorsque votre PC rejoint un nouveau réseau, il contacte automatiquement son serveur DHCP pour obtenir ses paramètres réseau : on parle alors **d'adressage dynamique**.
     - *Chez vous, le serveur DHCP tourne généralement sur votre box.*
@@ -36,7 +36,7 @@
 ## 2.3.2 - Config manuelle temporaire avec iproute2
 <details><summary>La commande <code>ip</code> vous permet d'inspecter et modifier manuellement votre config réseau. Les modifications sont <b>temporaires</b>.</summary>
 
-<img src=img/chad-du-rozo.png style=float:right height=300px>
+<img src=img/chad-du-rozo.png align=right  height=300px>
 
 + `ip address` : affiche les paramètres de niveau 2 et 3 pour toutes vos interfaces
     - `ip a` : raccourci
@@ -85,7 +85,7 @@
 
 ## 2.3.3 - Config persistente avec NetworkManager
 <details><summary><i>NetworkManager</i> est un <i>daemon</i> de configuration réseau qui est en train de devenir la méthode de configuration préférée de la plupart des distributions.</summary>
-<img src=img/nm-logo.png style=float:right>
+<img src=img/nm-logo.png align=right >
 
 Il définit et gère des profils de configuration qui s'appellent des **connexions**.
 
@@ -172,7 +172,7 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
 ## 2.3.5 - Outils de dépannage
 <details><summary>Quelques outils qui peuvent s'avérer pratiques pour quand Google est cassé...</summary>
 
-<img src=img/redémarrer-box.jpg width=20% style=float:right>
+<img src=img/redémarrer-box.jpg width=20% align=right >
 
 + `ping` : test de connectivité IP - **la base pour tester la couche 3**
     - `-6` : IPv6
@@ -210,7 +210,7 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
     - Non installé par défaut
 
 <br/>
-<img src=img/nonetworkproblem.png height=500px; style=float:right;vertical-align:middle>
+<img src=img/nonetworkproblem.png height=500px; align=right style=vertical-align:middle>
 
 *Vous risquez de rencontrer des gens qui vous diront de ne jamais accuser le réseau :*
 + *T'avais pas rentré la bonne IP ?*

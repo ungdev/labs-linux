@@ -6,7 +6,7 @@ C'est pour les feignants comme vous qu'on a des gestionnaires de paquets.
 
 <details>
 
-<img src=img/delivery-guy.jpg style=float:right width=17%>
+<img src=img/delivery-guy.jpg align=right width=17%>
 
 + Un **paquet** (*package*) est une archive qui contient à lui seul les données et les instructions nécessaires pour installer un programme, une *library*, voire un kernel ou un module de kernel.
     - Debian utilise des `.deb` ...
@@ -193,7 +193,7 @@ On utilise le gestionnaire de paquets `apt`
 + `dnf group list --available` : collections de paquets disponibles
 
 ##### Mettre à jour
-<img src=img/aptupdate-nonstop.png width=30% style=float:right>
+<img src=img/aptupdate-nonstop.png width=30% align=right>
 
 + `sudo apt[-get] -s upgrade [package...]` : vérifier s'il y a des mises à jour
     - (`-s` = `--simulate`)
@@ -250,7 +250,7 @@ On utilise le gestionnaire de paquets `apt`
 
 #### Pour aller plus loin
 <details>
-<img src=img/apt-prettystabletho.png width=20% style=float:right>
+<img src=img/apt-prettystabletho.png width=20% align=right>
 
 + [`dpkg`](https://www.cyberciti.biz/howto/question/linux/dpkg-cheat-sheet.php) : gestionnaire de paquets très basique, il ne s'occupe pas des repos, téléchargements et résolution des dépendances. Equivalent de `rpm` sur RHEL.
     - Installation de paquets téléchargés manuellement

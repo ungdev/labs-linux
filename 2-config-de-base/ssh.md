@@ -8,6 +8,8 @@ Que choisissez-vous ?
 ### 2.1.1 Présentation du protocole
 <details><summary>SSH (<b>Secure SHell</b>) - est un protocole incontournable en administration système.</summary>
 
+<img src=img/ssh!.png align=right width=20%>
+
 Il permet à un **client SSH** de se connecter à un **serveur SSH** de manière <u>sécurisée</u> pour **exécuter des commandes**, **transférer des fichiers** ou encore monter des tunnels.
 
 <details><summary>La sécurité d'SSH repose sur...</summary>

@@ -21,7 +21,7 @@ Que ce soient les comptes d'utilisateurs, la configuration de votre shell, votre
 
 <details><summary>Les fichiers et répertoires sont gérés par des <b>systèmes de fichiers</b> (<i>File Systems</i>).</summary>
 
-<img src=img/sw-paths.png width=20% style=float:right>
+<img src=img/sw-paths.png width=20% align=right>
 
 Un FS est une couche logique qui opère par dessus une partition d'un périphérique de stockage.
 
@@ -51,7 +51,7 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 #### Commandes de gestion de l'arborescence
 <details><summary><b>Commandes pour manipuler l'arborescence du système</b></summary>
 
-<img src=img/lscdpwd.jpg width=20% style=float:right>
+<img src=img/lscdpwd.jpg width=20% align=right>
 
 + `pwd` : afficher le chemin du **dossier courant**
 + `ls` : **lister le contenu du dossier** courant.
@@ -131,7 +131,7 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 ### Permissions
 <details><summary>Les fichiers et répertoires sont associés à des <b>permissions</b> à des fins de contrôle d'accès.</summary>
 
-<img src=img/touch-woman.jpeg width=20% style=float:right>
+<img src=img/touch-woman.jpeg width=20% align=right>
   
 + Les permissions possibles sont :
     - `r` : __*read*__
@@ -474,7 +474,7 @@ Puisque vous utilisez une interface textuelle, vous êtes en effet souvent amen�
 
 Nous allons survoler les commandes les plus utiles pour travailler avec du texte.
 
-<img src=img/traitement-texte.jpg width=20% style=float:right>
+<img src=img/traitement-texte.jpg width=20% align=right>
 
 + `cat <fichier...>` : **Afficher un ou plusieurs fichiers**
 	- On peut aussi l'utiliser pour **écrire dans des fichiers** grâce à des redirections : <a id=ecrire-avec-cat></a>
@@ -596,7 +596,7 @@ D'autres commandes plus gadget :
 ## 1.2.3 Gestion des utilisateurs & groupes
 <details>
 
-<img src=img/pb-couche8.png height=500px style=float:right>
+<img src=img/pb-couche8.png height=500px align=right>
 
 + `useradd <username>` : **ajouter un utilisateur**
 	- `-g <maingrp>` : groupe principal. Par défaut, un groupe avec le même nom que l'utilisateur est créé.
@@ -669,7 +669,7 @@ D'autres commandes plus gadget :
 	- `-l` : afficher la commande du processus en plus du PID
 	- `-u <user>` : chercher les processus d'un utilisateur donné
 		* `pgrep -l -u admin` : tous les processus de l'utilisateur *"admin"*
-+ `kill`, `killall` et `pkill` : **envoyer un signal** à des processus (le plus souvent **pour les arrêter**) <img src=img/suspicious-process.jpg width=20% style=float:right>
++ `kill`, `killall` et `pkill` : **envoyer un signal** à des processus (le plus souvent **pour les arrêter**) <img src=img/suspicious-process.jpg width=20% align=right>
 	- Par défaut, utilisent le **signal  9** (*SIGKILL*) qui "tue" le processus en le forçant à se terminer immédiatement.
 	- `kill -SIGTERM <PID...>` : terminer "gentiment" des processus (pour qu'ils se terminent correctement)
 	- `kill <PID...>` : terminer "méchamment" (tuer) des processus (forcer à quitter quand ils ne répondent pas)
@@ -742,7 +742,7 @@ D'autres commandes plus gadget :
 ## 1.2.5 Obtenir de l'aide
 <details><summary>Vous vous sentez peut-être perdu face à toutes ces commandes et à tous ces fichiers à "connaître par cœur". Rassurez-vous, même ceux qui utilisent Linux depuis le berceau ne les connaissent pas sur le bout des doigts : le plus important, c'est de <b><u>savoir où trouver de l'aide</u></b>.</summary>
 
-<img src=img/rtfm.png height=300px style=float:right>
+<img src=img/rtfm.png height=300px align=right>
 
 + `man <page>` : afficher le <u>**manuel**</u>
 	- `man kill` : manuel d'une commande
