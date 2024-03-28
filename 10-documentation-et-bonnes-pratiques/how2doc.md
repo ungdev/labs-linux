@@ -68,6 +68,9 @@ Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hés
 
 + La doc doit être rédigée en **Markdown**.
     - Vous pouvez utiliser des balises HTML si besoin.
++ User et abuser des nested lists. Premier niveau : `+`
+    - Deuxième niveau: `-`
+        * Troisième niveau et plus : `*`
 + Les lignes de commande et fichiers de config doivent toujours être entre **backticks** (\`) ou **triple-backticks** (\`\`\`). Si du syntax highlighting est possible, l'utiliser.
     - **Pas de screens des commandes et fichiers de config** - il faut pouvoir tout copier-coller - à moins que ce soit vraiment pour illustrer avec un exemple ou montrer le résultat d'une commande.
     - Quand la forme générique d'une ligne de commandes est compliquée, donner un exemple. 
