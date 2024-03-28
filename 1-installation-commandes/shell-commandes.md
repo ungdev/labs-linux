@@ -179,7 +179,7 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 <detail><summary>L'utilisateur <b><code>root</code> peut passer outre les permissions</b>. Il a <b>tous les droits sur le système</b>. L'administreur peut temporairement agir en temps que <code>root</code> en préfixant sa commande par <b><code>sudo</code></b>.
 
 - Exemple : `sudo cat /etc/shadow`
-- Toujours <u>**faire gaffe</u>. avant d'exécuter des commandes avec `sudo`**
+- <u>**Toujours. faire. gaffe</u>. avant d'exécuter des commandes avec `sudo`**
 	* Par exemple, `sudo rm -rf /` supprimerait définitivement TOUTE l'arborescence du système.
 	* ![](img/sudo-whatever.jpeg)
 - D'un autre côté, tant que vous n'utilisez pas `sudo`, il ne peut rien vous arriver de grave.
