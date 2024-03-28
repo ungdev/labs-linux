@@ -1,7 +1,9 @@
 # 1.2 - Commandes de base
+<img src=img/hackerman.png style=float:right width=15%>
 Tuto niveau débutant à intermédiaire. On a quand même mis quelques exercices corsés pour ceux qui commencent à toucher leur bille.
 
 Il y a beaucoup de commandes alors **n'essayez pas de tout apprendre par cœur** - voyez le plutôt comme une *"cheatsheet"*. On vous conseille de lire ce qui vous intéresse, faire les exercices et revenez voir les commandes si vous avez un doute.
+
 
 ## Pour découvrir / s'entraîner
 + [GameShell](https://github.com/phyver/GameShell) : Un mini-jeu qui vous fait utiliser toutes ces notions. Le mieux pour découvrir et mettre en pratique. Si vous arrivez au dernier niveau, vous pouvez considérer que c'est acquis pour vous.
@@ -144,12 +146,13 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
         * `r-x` en notation symbolique
         * `5` en notation octale
 
-<details><summary>Pour récapituler, voici quelques exemples :</summary>
+<details><summary><b>Quelques exemples pour récapituler...</b></summary>
 
 + `rwx rwx rwx` ou `777` :
     - `u=rwx` : l'utilisateur propriétaire a tous les droits
     - `g=rwx` : le groupe propriétaire a tous les droits
     - `o=rwx` : tous les autres utilisateurs ont tous les droits
+		* <img src=img/our-file.png height=400px>
     - Le fichier est donc publiquement lisible, modifiable et exécutable.
 + `rwx r-x r-x` ou `755` :
     - Tout le monde peut lire et exécuter
@@ -163,6 +166,7 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
     - Le fichier n'est pas exécutable.
 
 </details>
+</br>
 
 + L'utilisateur `root` peut passer outre les permissions. Il a **tous les droits sur le système**. L'administreur peut temporairement agir en temps que `root` en préfixant votre commande par **`sudo`** - mais, il fait alors très attention à ce qu'il fait !
 	- Exemple : `sudo cat /etc/shadow`
@@ -455,6 +459,8 @@ Puisque vous utilisez une interface textuelle, vous êtes en effet souvent amen�
 
 Nous allons survoler les commandes les plus utiles pour travailler avec du texte.
 
+<img src=img/traitement-texte.jpg width=20% style=float:right>
+
 + `cat <fichier...>` : **Afficher un ou plusieurs fichiers**
 	- On peut aussi l'utiliser pour **écrire dans des fichiers** grâce à des redirections : <a id=ecrire-avec-cat></a>
 		* `cat > toto.txt` : créer / remplacer toto.txt
@@ -575,6 +581,8 @@ D'autres commandes plus gadget :
 ## 1.2.3 Gestion des utilisateurs & groupes
 <details>
 
+<img src=img/pb-couche8.png height=500px style=float:right>
+
 + `useradd <username>` : **ajouter un utilisateur**
 	- `-g <maingrp>` : groupe principal. Par défaut, un groupe avec le même nom que l'utilisateur est créé.
 	- `-G <groups...>` : groupes secondaires
@@ -646,13 +654,15 @@ D'autres commandes plus gadget :
 	- `-l` : afficher la commande du processus en plus du PID
 	- `-u <user>` : chercher les processus d'un utilisateur donné
 		* `pgrep -l -u admin` : tous les processus de l'utilisateur *"admin"*
-+ `kill`, `killall` et `pkill` : **envoyer un signal** à des processus (le plus souvent **pour les arrêter**)
++ `kill`, `killall` et `pkill` : **envoyer un signal** à des processus (le plus souvent **pour les arrêter**) <img src=img/suspicious-process.jpg width=20% style=float:right>
+	- Par défaut, utilisent le **signal  9** (*SIGKILL*) qui "tue" le processus en le forçant à se terminer immédiatement.
 	- `kill -SIGTERM <PID...>` : terminer "gentiment" des processus (pour qu'ils se terminent correctement)
 	- `kill <PID...>` : terminer "méchamment" (tuer) des processus (forcer à quitter quand ils ne répondent pas)
 	- `killall <commande>` : chercher les processus par nom et les tuer
     	* `killall firefox` 
     	* `-u` : seulement pour mon utilisateur
     	* `-SIGTERM` : terminer "gentiment"
+    	* <img src=img/killall.jpg height=450px>
 	- `kill $(pgrep <pattern>)` : tuer par pattern
 	- `pkill -u <username>` : tuer tous les processus d'un utilisateur.
     	* *NB : Si vous tuez tous vos processus alors que vous êtes connecté en SSH, vous perdrez votre connexion.*
@@ -665,7 +675,8 @@ D'autres commandes plus gadget :
 	- `Ctrl+C` : Interrompre le processus
 	- `bg %<jid>` : reprendre le processus de job ID *"jid"* en tâche de fond
 	- `fg %<jid>` : faire revenir un processus au premier plan et le reprendre s'il était arrêté
-		* Exemple : ```bash
+		* Exemple : 
+		* ```bash
 				sleep 20
 				[ctrl+z]
 				jobs
@@ -716,6 +727,8 @@ D'autres commandes plus gadget :
 ## 1.2.5 Obtenir de l'aide
 <details><summary>Vous vous sentez peut-être perdu face à toutes ces commandes et à tous ces fichiers à "connaître par cœur". Rassurez-vous, même ceux qui utilisent Linux depuis le berceau ne les connaissent pas sur le bout des doigts : le plus important, c'est de <b><u>savoir où trouver de l'aide</u></b>.</summary>
 
+<img src=img/rtfm.png height=300px style=float:right>
+
 + `man <page>` : afficher le <u>**manuel**</u>
 	- `man kill` : manuel d'une commande
 	- `man sshd_config` : manuel d'un fichier de config
@@ -728,7 +741,6 @@ D'autres commandes plus gadget :
 + `/usr/share/doc` : fichiers de doc (souvent, la doc pour des serveurs est bien fournie)
 
 Quand on débute, on a tendance à foncer chercher sur Internet et à oublier que de l'aide en lignes de commandes existe. Habituez-vous à utiliser l'aide en ligne de commandes, qui peut apporter des réponses précises et rapides.
-
 
 </details>
 
