@@ -69,7 +69,7 @@ Voici la liste des thématiques actuellement disponibles et à venir:
 * [Thématique 7: Surveillance et maintenance]
 * [Thématique 8: Docker](8-docker/README.md)
 * [Thématique 9: Sauvegarde et Restauration]
-* [Thématique 10: Documentation et Bonnes Pratiques]
+* [Thématique 10: Documentation et Bonnes Pratiques](10-documentation-et-bonnes-pratiques/README.md)
 * [Thématique 11: Automatisation]
 * [Thématique 12: Haute disponibilité et scalabilité]
 * [Thématique 13: La théorie derrière Linux et les OS]
