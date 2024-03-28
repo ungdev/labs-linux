@@ -1,5 +1,5 @@
 # 1.2 - Commandes de base
-<img src=img/hackerman.png align=right width=15%>
+<img src=img/hackerman.png align=right width=20%>
 Tuto niveau débutant à intermédiaire. On a quand même mis quelques exercices corsés pour ceux qui commencent à toucher leur bille.
 
 Il y a beaucoup de commandes alors **n'essayez pas de tout apprendre par cœur** - voyez le plutôt comme une *"cheatsheet"*. On vous conseille de lire ce qui vous intéresse, faire les exercices et revenez voir les commandes si vous avez un doute.
@@ -13,7 +13,7 @@ Il y a beaucoup de commandes alors **n'essayez pas de tout apprendre par cœur**
 ### Systèmes de fichiers
 <details><summary>Sur Linux, <i>"tout est fichier"</i>.</summary>
 
-<img src=img/everything-a-file.jpg width=20%>
+<img src=img/everything-a-file.jpg width=25%>
 
 Que ce soient les comptes d'utilisateurs, la configuration de votre shell, votre clavier ou votre connexion avec un serveur distant, presque tout est représenté par des fichiers.
 
@@ -21,7 +21,7 @@ Que ce soient les comptes d'utilisateurs, la configuration de votre shell, votre
 
 <details><summary>Les fichiers et répertoires sont gérés par des <b>systèmes de fichiers</b> (<i>File Systems</i>).</summary>
 
-<img src=img/sw-paths.png width=20% align=right>
+<img src=img/sw-paths.png width=25% align=right>
 
 Un FS est une couche logique qui opère par dessus une partition d'un périphérique de stockage.
 
@@ -51,7 +51,7 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 #### Commandes de gestion de l'arborescence
 <details><summary><b>Commandes pour manipuler l'arborescence du système</b></summary>
 
-<img src=img/lscdpwd.jpg width=20% align=right>
+<img src=img/lscdpwd.jpg width=25% align=right>
 
 + `pwd` : afficher le chemin du **dossier courant**
 + `ls` : **lister le contenu du dossier** courant.
@@ -131,7 +131,7 @@ Le FS a d'autres tâches comme [gérer les permissions](#les-permissions-unix) s
 ### Permissions
 <details><summary>Les fichiers et répertoires sont associés à des <b>permissions</b> à des fins de contrôle d'accès.</summary>
 
-<img src=img/touch-woman.jpeg width=20% align=right>
+<img src=img/touch-woman.jpeg width=25% align=right>
   
 + Les permissions possibles sont :
     - `r` : __*read*__
@@ -537,7 +537,7 @@ Nous allons survoler les commandes les plus utiles pour travailler avec du texte
 
 + [`sort`](https://www.redhat.com/sysadmin/sort-command-linux) : **trier** les lignes
 	- *Exemple : `ls -l | sort -n -k5`  : contenu du dossier, trié par taille croissante*
-+ [**`sed`**]**(https://quickref.me/sed.html) : traitement de texte avancé par expressions régulières. **Incontournable**.
++ [**`sed`**](https://quickref.me/sed.html) : traitement de texte avancé par expressions régulières. **Incontournable**.
 	- _Exemple : `sed '1,$s/:/|/g'` remplace les *":"* par des *"|"* sur la première et la dernière ligne._
 + [xargs](https://www.malekal.com/comment-utiliser-commande-xargs-exemples/) : convertir l'entrée standards en arguments à passer à une commande
 
