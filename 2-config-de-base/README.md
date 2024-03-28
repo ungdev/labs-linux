@@ -17,3 +17,8 @@ Niveau débutant/intermédiaire
     - [2.3.3 - Config persistente avec *NetworkManager*](rozo.md#233---config-persistente-avec-networkmanager)
     - [2.3.4 - Config du resolver DNS (*resolv.conf*)](rozo.md#234---config-du-resolver-dns-avec-resolvconf)
     - [2.3.5 - Outils de dépannage](rozo.md#235---outils-de-dépannage)
+ 
+<details><summary><i>Contributeurs :</i></summary>
+    
++ Félix Houdebert [felix.houdebert@utt.fr](mailto:felix.houdebert@utt.fr)
+</details>
