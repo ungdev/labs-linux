@@ -113,6 +113,130 @@ Pour plus d'informations sur les instructions Dockerfile, vous pouvez consulter 
 
 </details>
 
+<details><summary>La persistance des données</summary>
+
+Les conteneurs Docker sont éphémères, ce qui signifie que les données stockées à l'intérieur d'un conteneur sont perdues lorsque le conteneur est supprimé. Pour persister les données, on peut utiliser des volumes Docker.
+
+#### Montage d'un répertoire hôte
+
+On peut monter un répertoire de l'hôte dans un conteneur Docker en utilisant l'option `-v` de la commande `docker run`. Cela permet de persister les données du conteneur sur le système hôte.
+
+```bash
+$ docker run -d --name webserver -p 80:80 -v /path/to/your/html:/usr/share/nginx/html nginx
+```
+
+Dans cet exemple, le répertoire `/path/to/your/html` de l'hôte est monté dans le répertoire `/usr/share/nginx/html` du conteneur. Cela permet de persister les données du serveur web.
+
+#### Les volumes Docker
+
+Les volumes Docker sont des mécanismes de stockage persistant qui permettent de partager des données entre les conteneurs Docker. Les volumes Docker sont indépendants des conteneurs, ce qui signifie qu'ils peuvent être partagés entre plusieurs conteneurs. Cela permet d'éviter des conflits de permissions avec le *file system* de l'hôte.
+
+Pour créer un volume Docker, on peut utiliser la commande `docker volume create` :
+
+```bash
+$ docker volume create myvolume
+```
+
+On peut ensuite monter le volume dans un conteneur en utilisant l'option `--mount` de la commande `docker run` :
+
+```bash
+$ docker run -d --name dbserver --mount source=myvolume,target=/var/lib/mysql mysql
+```
+
+</details>
+
+<details><summary>Les réseaux Docker</summary>
+
+Les réseaux Docker permettent de connecter des conteneurs Docker entre eux. Les réseaux Docker sont des réseaux virtuels qui permettent aux conteneurs de communiquer entre eux.
+
+#### Les différents types de réseaux Docker
+
+Il existe plusieurs types de réseaux Docker :
+- **Bridge network** : Le réseau par défaut pour les conteneurs Docker. Les conteneurs connectés à un réseau bridge peuvent communiquer entre eux.
+  > Cela a créée un réseau privé pour les conteneurs sur l'hôte.
+- **Host network** : Les conteneurs connectés à un réseau host partagent le même réseau que l'hôte.
+  > Les conteneurs partagent le réseau de l'hôte.
+- **Overlay network** : Les réseaux overlay permettent de connecter des conteneurs Docker sur plusieurs hôtes.
+  >  Il permet la communication transparente entre les conteneurs déployés sur différents serveurs, créant ainsi un réseau virtuel global au sein d'un cluster Docker.
+- **Macvlan network** : Les réseaux macvlan permettent de connecter des conteneurs Docker à un réseau physique.
+  > Connecté directement à un réseau physique, chaque conteneur a une adresse IP sur le réseau physique, ainsi qu'une adresse MAC.
+- **IPvlan network** : Les réseaux ipvlan permettent de connecter des conteneurs Docker à un réseau virtuel.
+  > Les conteneurs sont connectés à un réseau virtuel, mais ils ont une adresse IP sur le réseau physique.
+
+#### Exposer un service
+
+Pour exposer un service d'un conteneur Docker sur un réseau, on peut utiliser l'option `-p` de la commande `docker run`. Cela permet de mapper un port du conteneur sur un port de l'hôte.
+
+```bash
+$ docker run -d --name webserver -p 80:80 nginx
+```
+
+#### Crée un réseau Docker
+
+Pour créer un réseau Docker, on peut utiliser la commande `docker network create` :
+
+```bash
+$ docker network create mynetwork
+```
+
+On peut utiliser les options suivante:
+- `-d` : pour spécifier le driver du réseau.
+- `--subnet` : pour spécifier le sous-réseau du réseau.
+- `--gateway` : pour spécifier la passerelle du réseau.
+- `-o` : pour spécifier des options supplémentaires.
+
+<details><summary>Exercices</summary>
+
+Recherchez et utilisez la commande Docker pour créer un réseau de type `ipvlan` :
+- Subnet : `10.23.12.0/24`
+- Gateway : `10.23.12.254`
+- Parent interface : `ens160`
+- Mode : `L2`
+
+</details>
+
+</details>
+
+<details><summary>Docker Hub</summary>
+
+Docker Hub est un service public qui permet de stocker et de partager des images Docker. Docker Hub est un registre Docker qui contient des milliers d'images Docker prêtes à l'emploi.
+
+```
+https://hub.docker.com/
+```
+
+Pour rechercher une image Docker sur Docker Hub, on peut utiliser la commande `docker search` :
+
+```bash
+$ docker search nginx
+```
+
+Pour télécharger une image Docker depuis Docker Hub, on peut utiliser la commande `docker pull` :
+
+```bash
+$ docker pull nginx
+```
+
+#### Push vers Docker Hub
+Une fois que vous avez créé une image Docker (par exemple en la buildant), et que vous l'avez taguée avec :
+```bash
+$ docker tag myimage username/myimage
+```
+
+On peut se connecter à Docker Hub avec la commande `docker login` :
+```bash
+$ docker login
+```
+
+Puis on peut pousser l'image vers Docker Hub avec la commande `docker push` :
+```bash
+$ docker push username/myimage:tag
+```
+
+</details>
+
+---
+
 <details><summary>Exercices</summary>
 
 <details><summary>Exercice  <b> très basique </b> </summary>

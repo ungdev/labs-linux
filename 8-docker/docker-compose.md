@@ -71,6 +71,9 @@ Il existe aussi des options (comme avec la commande docker):
 - `docker compose up --build`: pour construire les images avant de lancer les services
 - ...
 
+> Vous pouvez consulter la documentation officielle de Docker Compose pour plus d'informations.
+> [Docker Compose](https://docs.docker.com/compose/)
+
 </details>
 
 <details><summary>Exercices</summary>
@@ -111,3 +114,9 @@ networks:
 </details>
 
 </details>
+
+</details>
+
+### Projet WordPress
+
+Le but de cet exercice sera de déployer un site WordPress avec une base de données MySQL.
