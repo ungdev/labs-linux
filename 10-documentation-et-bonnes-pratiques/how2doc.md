@@ -65,6 +65,48 @@ Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hés
 
 </details>
 
+Un exemple est également celui de la doc choisie pour le nouveau SIA:
+
+<details><summary>Doc du SIA</summary>
+
+#### Choix d'un IPAM
+
+L'IPAM (IP Address Management) est un outil qui permet de gérer les adresses IP d'un réseau.  
+Nous avons choisit **NetBox**.
+
+#### Choix de l'outil de documentation
+
+Le choix de l'outil de documentation à été un choix difficile, car il fallait trouver un outil qui soit simple d'utilisation, mais qui permette de faire des docs complexes.
+
+Nous avons fini par choisir **Wikijs**.
+
+#### Forme de la doc
+
+Deux guides:
+- Un guide utilisateur
+    - Fait pour un utilisateur final (l’étudiant UTT lambda)
+- Un guide administrateur
+  - (catégorie Architecture) Expliquer le SIA (dans son ensemble)
+    - Vive les schéma !!!!!! (Exqualidro)
+    - On fait dedans le listing des déploiements (c’est à dire la liste des VM, la liste des serveurs PX etc…)
+    - Conventions de nommages
+    - Comment on fait des déploiements (avoir un ensemble cohérent, des procédures) ? Très général ! (pas par service)
+      - Processus de décision entre VM/Kube : par définition, on déploie sur Kube, sauf quelques rares cas que l’on définit ici. Et du coup, on explique pk on a choisi Kube pour tout déployer.
+- Un service/outil (genre Kubernetes, dolibarr, Proxmox…)
+  - Etat des services (aka liste des services, pour quels assos, déployé où et quand) 
+  - Comment déployer
+  - Comment maintenir
+  - Comment supprimer
+
+    > **Attention:** Les états (comprend le où, quand, comment, et changelog) qui concernent l’architecture (liste des VM par exemple) serait fait par la partie architecture, la liste des services (quels dolibarr) serait fait dans la partie service/outil.  La limite serait placé au point de vue utilisateur final.
+
+- Guide de la documentation
+- Audit de la doc par l’extérieur (comment kon fait)
+
+
+</details>
+
+
 ## 10.1.3 Considérations de forme
 <details>
 
