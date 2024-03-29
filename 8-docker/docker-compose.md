@@ -210,7 +210,8 @@ Avec comme consignes :
   ```
   > Cela ajoute pour l'entrypoint `web` un routeur pour le service `wordpress` avec la règle `Host('wordpress.localhost')` et le port `80`.
 
-- Rajouter les labels pour les services `adminer` et `wordpress` pour les exposer. (Avec par exemple comme host `adminer.localhost` et `wordpress.localhost`)
+- Rajouter les labels pour les services `adminer` et `wordpress` pour les exposer. (Avec par exemple comme host `adminer.localhost` et `wordpress.localhost`)  
+- 
   <img src="img/DC_projet.png" width="70%">
 
 - Vous pouvez ajouter cette commande pour le service traefik afin d'activer le pannel et d'exposer les ports:
@@ -221,5 +222,6 @@ Avec comme consignes :
 
 
 
-> Traefik est un outil puissant pour gérer les routes et les services. Vous pouvez consulter la documentation officielle pour plus d'informations.
+> Traefik est un outil puissant pour gérer les routes et les services. Vous pouvez consulter la documentation officielle pour plus d'informations.  
+> 
 > <img src="img/traefik.png" width="70%">
