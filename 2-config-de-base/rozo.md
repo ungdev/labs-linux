@@ -181,6 +181,7 @@ Toutefois, vous pouvez être amenés à utiliser d'autres méthodes pour créer 
 + `traceroute` : tracer le chemin vers un hôte
     - Utilise le port 33434/udp, qui n'est pas forcément ouvert sur les firewalls. Il est donc souvent impossible d'avoir le chemin complet.
     - Vous pouvez utiliser un autre port [UDP, voire un port TCP](https://stackoverflow.com/questions/10995781/trace-a-particular-ip-and-port), pour augmenter les chances de tracer le chemin complet
+        * Vous pouvez aussi utiliser ICMP (comme pour un *ping*) avec l'option `-I`
 + `nc <host> <port>` : netcat - client/serveur TCP/UDP brut - **utile pour tester la couche 4**
     - `nc  22` : tester que le port SSH est ouvert et écoute
     - `sudo nc -l -p 636` : mode serveur, écoute sur 636/tcp
