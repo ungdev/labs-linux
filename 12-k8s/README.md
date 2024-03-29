@@ -1,5 +1,11 @@
-# 12.1 Introduction à Kubernetes
+# 12 Haute disponibilité et scalabilité
 
-Kubernetes est un orchestrateur de conteneurs open-source qui permet d'automatiser le déploiement, la mise à l'échelle et la gestion des applications conteneurisées. Il a été conçu par Google et est maintenant maintenu par la Cloud Native Computing Foundation (CNCF).
+Vous connaissiez déjà les bases de l'administration système, et vous avez appris à mettre en place des architectures microservices avec Docker. Vous êtes maintenant prêts à passer à l'étape suivante : la haute disponibilité et la scalabilité.
 
-## 12.1.1 Pourquoi Kubernetes ?
+Niveau avancé
+
+On a utilisé Kubernetes pour la mise en place de l'architecture microservices.
+
++ [12.1 - Introduction à Kubernetes](k8s.md#121-introduction-à-kubernetes)
+    - [12.1.1 - Pourquoi Kubernetes ?](k8s.md#1211-pourquoi-kubernetes-?)
+    - [12.1.2 - Architecture de Kubernetes](k8s.md#1212-architecture-de-kubernetes)
