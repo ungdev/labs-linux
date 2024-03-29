@@ -235,7 +235,7 @@ $ docker push username/myimage:tag
 
 </details>
 
----
+## 8.1.3 Exercices
 
 <details><summary>Exercices</summary>
 

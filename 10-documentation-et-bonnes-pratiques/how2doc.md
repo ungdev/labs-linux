@@ -89,3 +89,23 @@ Ne pas hésiter à rajouter des sous-parties. Pour des docs longues, ne pas hés
 + Pour citer la doc officielle, des paroles ou des conseils reçus : utiliser une *blockquote* : `>`
 
 </details>
+
+## 10.1.4 Remarques sur le SIA
+
+Le SIA (système d'information des associations) est l'infrastructure proposée aux associations et club de l'UNG.
+Depuis 2024, cette dernière est en cours de refonte. La doc du SIA est donc en cours de rédaction.
+
+Les raisons sont diverses mais on surtout cité une **mauvaise documentation** une **maintenance difficile** et une **sécurité insuffisante**, et ceux pour plusieurs raisons :
+ - A l'époque le SIA était géré par peu d'étudiant, qui ont fini par partir.
+ - Le problème de la **transmission des compétences**, et d'une très mauvaise documentation de qui a été fait.
+ - Les **technologies** beaucoup trop récente et prématuré pour être utilisé dans un cadre de production.
+   - C'est un très gros problème, car les étudiants n'ont pas forcément les compétences pour gérer ces technologies par la suite, même si cela reste un très bon terrain d'apprentissage.
+   - C'est pourquoi durant le construction du nouveaux SIA nous avons décidé de **simplifier** au maximum les technologies utilisées, pour que les étudiants puissent facilement reprendre le projet, ainsi que la création d'un **labs** pour que les étudiants puissent apprendre à gérer ces technologies avant de les utiliser en production, et également tester les **nouvelles** technologies.
+
+### La **documentation** ne fait pas tout !
+
+En effet, la documentation est un élément clé pour la maintenance et la transmission des compétences, mais elle ne fait pas tout. Il est important de **transmettre** les compétences, et de **former** les étudiants à la gestion de ces technologies.  
+La documentation est seulement un support très technique, qui ne permet pas de comprendre les enjeux et les problématiques de l'infrastructure fondamentalement. Elle n'a **pas** pour but de former les étudiants.  
+C'est aussi pourquoi il faut justifier l'utilisation des technologies, et expliquer pourquoi elles ont été choisies.  
+
+Il faut également proposer des supports de formation, comme celui-ci, pour que les étudiants puissent apprendre à gérer ces technologies.

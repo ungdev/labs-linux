@@ -76,6 +76,12 @@ Il existe aussi des options (comme avec la commande docker):
 
 </details>
 
+<details><summary>Le format `yaml`</summary>
+
+</details>
+
+---
+
 <details><summary>Exercices</summary>
 
 <details><summary>Exercice 1</summary>
@@ -117,6 +123,7 @@ networks:
 
 </details>
 
-### Projet WordPress
+## 8.2.2 Projet WordPress
 
-Le but de cet exercice sera de déployer un site WordPress avec une base de données MySQL.
+Le but de cet exercice sera de déployer un site WordPress (ngnix) avec une base de données MySQL (mariadb) et un outil de gestion graphique de la base de données (adminer).
+

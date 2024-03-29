@@ -6,8 +6,10 @@ Niveau intermédiaire
 + [8.1 - Introduction à l'architecture microservices](docker.md#81-introduction-à-larchitecture-microservices)
     - [8.1.1 - Qu'est-ce qu'une architecture microservices](docker.md#811-qu-est-ce-qu-une-architecture-microservices)
     - [8.1.2 - Introduction à Docker](docker.md#812-introduction-à-docker)
+    - [8.1.3 - Exercices](docker.md#813-exercices)
 + [8.2 - Docker Compose](docker-compose.md)
     - [8.2.1 - Les bases de Docker Compose](docker-compose.md#821-les-bases-de-docker-compose)
+    - [8.2.2 - Projet WordPress](docker-compose.md#822-projet-wordpress)
  
 <details><summary><i>Contributeurs :</summary>
 
