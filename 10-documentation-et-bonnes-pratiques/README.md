@@ -10,4 +10,5 @@ Les mantras sacrés de l'admin
 <details><summary><i>Contributeurs :</i></summary>
     
 + *Félix Houdebert [felix.houdebert@utt.fr](mailto:felix.houdebert@utt.fr)*
++ *Noë Charlier [noe.charlier@utt.fr](mailto:noe.charlier@utt.fr)*
 </details>
