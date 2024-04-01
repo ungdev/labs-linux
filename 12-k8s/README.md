@@ -22,7 +22,11 @@ Niveau avancé
         - [DaemonSets](k8s.md#daemonsets)
         - [Jobs](k8s.md#jobs)
         - [CronJobs](k8s.md#cronjobs)
-
++ [12.2 - Application pratique](pratique.md#122-application-pratique)
+    - [12.2.1 - Installation de Kubernetes](pratique.md#1221-installation-de-kubernetes)
+    - [12.2.2 - Découverte de kubectl et Minikube](pratique.md#1222-découverte-de-kubectl-et-minikube)
+    - [12.2.3 - Déploiement d'une application](pratique.md#1223-déploiement-dune-application)
+    - [12.2.4 - Mise à l'échelle de l'application](pratique.md#1224-mise-à-léchelle-de-lapplication)
 <details><summary><i>Contributeurs :</summary>
 
 + Noë Charlier [noe.charlier@utt.fr](mailto:noe.charlier@utt.fr)
