@@ -101,3 +101,75 @@ Par exemple ici, on peut choisir l'url de la base de données avec un *configMap
 > TL;DR:
 > - Les ConfigMap permettent de stocker des données de configuration.
 > - Les Secrets permettent de stocker des secrets.
+
+#### Volumes
+
+Les **volumes** sont des composants qui permettent de stocker des données. Les volumes sont montés dans les pods, et permettent de stocker des données qui doivent survivre au cycle de vie des pods.
+
+Les données peuvent être stockées sur le disque local de la machine, ou sur un service de stockage externe, comme Amazon S3, Google Cloud Storage, etc.
+
+Par exemple ici, on a un volume qui est monté dans le pod `db-1`, et qui permet de stocker des données qui doivent survivre au cycle de vie du pod.
+
+<img src="img/volumes.png" width=70%>
+
+> TL;DR:
+> - Les volumes permettent de stocker des données.
+> - Les données stockées dans un volume survivent au cycle de vie des pods.
+> - Les données peuvent être stockées sur le disque local de la machine, ou sur un service de stockage externe.
+
+#### Deployments
+
+Un **deployment** est un composant qui permet de déployer et de mettre à jour des applications dans Kubernetes, c'est le composant par lequel les pods peuvent être crée. Un deployment permet de définir l'état désiré de l'application, et Kubernetes se charge de faire en sorte que l'état actuel de l'application corresponde à l'état désiré.  
+
+Le deployment permet de définir le nombre de réplicas de l'application, et Kubernetes se charge de faire en sorte que le nombre de réplicas actuel corresponde au nombre de réplicas désiré. On peut choisir également comment sont répartis les pods, par exemple si on veut que les pods soient répartis de manière équitable sur les worker nodes. Cela permet de la haute disponibilité.
+
+**Attention**, chaque pods crée par un deployement est un pod qui stateless, c'est à dire qu'il ne garde pas d'état, et que si il tombe en panne, il est recrée à l'identique dde tous les autres pods.  
+**On ne peut donc pas crée de base données avec** (car une base de données agit sur des données, imagniez si deux pods de la même base de données modifient les données en même temps).
+
+Par exemple ici, on a un deployment qui définit l'état désiré de l'application `app-1`, avec 2 réplicas (une sur chaque node), et qui se charge de faire en sorte que l'état actuel de l'application corresponde à l'état désiré.
+
+<img src="img/Deployements.png" width=70%>
+
+> TL;DR:
+> - Un deployment permet de déployer et de mettre à jour des applications dans Kubernetes.
+> - Un deployment agit un peu comme un blueprint pour les pods.
+> - C'est l'asbtraction des pods
+> - C'est le bon moyen pour déploier des applications sur Kubernetes
+> - Les pods crée par un deployment sont stateless.
+
+#### ReplicaSets
+
+Un **replicaSet** est un composant qui permet de garantir un nombre spécifique de réplicas de pods. Un replicaSet permet de définir le nombre de réplicas de l'application, et Kubernetes se charge de faire en sorte que le nombre de réplicas actuel corresponde au nombre de réplicas désiré.  
+Il est souvent crée automatiquement par un deployment.  
+On y revient plus tard.
+
+`TODO`
+
+#### StatefulSets
+
+Un **statefulSet** est un composant qui permet de garantir un nombre spécifique de réplicas de pods, mais contrairement à un replicaSet, les pods crée par un statefulSet sont stateful, c'est à dire qu'ils gardent un état.
+
+Un statefulSet est utilisé pour les applications qui ont besoin de garder un état, comme une base de données.
+
+`TODO`
+
+
+#### DaemonSets
+
+Un **daemonSet** est un composant qui permet de déployer un pod sur chaque worker node. Un daemonSet est utilisé pour les applications qui doivent être exécutées sur chaque worker node, comme un agent de monitoring.
+
+`TODO`
+
+
+#### Jobs
+
+Un **job** est un composant qui permet d'exécuter une tâche à la demande. Un job est utilisé pour les tâches qui doivent être exécutées une seule fois, comme un script de migration de base de données.
+
+`TODO`
+
+
+#### CronJobs
+
+Un **cronJob** est un composant qui permet d'exécuter une tâche à intervalle régulier. Un cronJob est utilisé pour les tâches qui doivent être exécutées régulièrement, comme un script de sauvegarde de base de données.
+
+`TODO`
