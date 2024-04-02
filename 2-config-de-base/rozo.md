@@ -20,7 +20,7 @@
 ### Configuration statique ou dynamique
 <details>
 
-<img src=img/serveur-dhcpniet-staticyep.jpg height=300px align=right ;>
+<img src=img/serveur-dhcpniet-staticyep.jpg height=300px align=right>
 
 + Si vous n'avez pas à configurer ces paramètres à chaque fois que vous vous connectez sur un nouveau réseau avec votre PC, c'est grâce au **DHCP** (*Dynamic Host Configuration Protocol*, parfois aussi connu à tort sous l'appellation *Dark-green Hot Chili Peppers*). Lorsque votre PC rejoint un nouveau réseau, il contacte automatiquement son serveur DHCP pour obtenir ses paramètres réseau : on parle alors **d'adressage dynamique**.
     - *Chez vous, le serveur DHCP tourne généralement sur votre box.*
