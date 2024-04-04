@@ -1,0 +1,49 @@
+# sudo useradd moo -md /opt/moo -s /usr/bin/nologin
+# sudo mkdir /var/run/moo /var/log/moo
+# sudo chown -R moo:moo /var/run/moo /var/log/moo
+# sudo chmod -R 750 /var/run/moo /var/log/moo
+# sudo -u moo /opt/moo/moo.sh # (copier le contenu du script)
+# sudo chmod 550 /opt/moo/moo.sh
+
+# /etc/systemd/system/moo.service
+[Unit]
+Description=Meeuh
+After=network.target
+
+[Service]
+Environment=MOO_PORT=3310
+Environment=MOO_SOCK=/var/run/moo/moo.sock
+
+ExecStart=sh /opt/moo/moo.sh ${MOO_SOCK} ${MOO_PORT}
+
+User=moo
+Group=moo
+
+ExecCondition=sh -c '[ ! -z "$(which cowsay)" ]'
+ExecStartPre=sh -c 'rm -f  ${MOO_SOCK}; mkfifo ${MOO_SOCK}'
+ExecStopPost=rm -f ${MOO_SOCK}
+
+StandardOutput=append:/var/log/moo/moo.out
+StandardError=append:/var/log/moo/moo.err
+
+Restart=always
+RestartSec=1sec
+
+PIDFile=/var/run/moo/moo.pid
+
+[Install]
+WantedBy=multi-user.target
+
+# sudo systemctl daemon-reload
+# sudo systemctl start moo
+# systemctl status moo
+# journalctl -eu moo
+# echo "test" | socat - tcp:localhost 3310
+# sudo cat /var/log/moo/moo.out
+# echo "test2" | socat - tcp:localhost 3310
+# sudo cat /var/log/moo/moo.out
+# sudo systemctl stop moo
+# sudo cat /var/log/moo/moo.err
+# sudo systemctl enable moo
+# sudo systemctl reboot
+# echo "still running ?" | socat - tcp:localhost 3310
