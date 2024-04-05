@@ -1,9 +1,7 @@
 # 4 - Gestion des services
-Un serveur, c'est fait pour servir - et le métier d'un serveur, c'est de faire tourner des **services**.
+Un serveur, c'est fait pour servir - et le métier d'un serveur, c'est de faire tourner des **services**. 
 
 Il va donc vous falloir gérer le cycle de vie et la configuration des services.
-
-
 
 + [4.1 - Gestion des services avec systemd](services.md)
     - [4.1.1 Concepts clefs](services.md#411---concepts-clefs)

@@ -247,7 +247,9 @@ Il y a de nombreuses autres directives utilisées dans les *service units* et ch
 </details>
 
 ### Exercices
-#### Exercice 1 - Systemctl (Débutant)
+<details>
+
+#### Exercice 1 - La base (Débutant)
 <details>
 
 + Affichez toutes les *service units* à l'état *active*
@@ -260,7 +262,7 @@ Il y a de nombreuses autres directives utilisées dans les *service units* et ch
 
 </details>
 
-#### Exercice 2 - Modifier une service unit (Intermédiaire)
+#### Exercice 2 - Plagiat (Intermédiaire)
 <details>
 
 Il arrive parfois de faire tourner deux serveurs SSH simultanément sur un serveur : l'un est exposé aux admins et sert à administrer le serveur, l'autre est exposé publiquement à des clients qui ont un compte sur le serveur et accèdent à un shell restreint ou peuvent télécharger des fichiers avec `scp`, `rsync` ou `sftp`. Par exemple, les repos `git` font tourner un serveur SSH qui donne accès à un shell restreint capable d'interpréter des commandes *git*.
@@ -303,7 +305,7 @@ Nous allons nous inspirer du service `sshd` pour créer une deuxième instance b
 </details>
 </details>
 
-#### Exercice 3 - Créer un service de toutes pièces (Intermédiaire/Avancé)
+#### Exercice 3 - DIY (Intermédiaire/Avancé)
 <details>
 
 Vous allez créer un service fait maison à partir d'un serveur simple créé avec `socat`.
@@ -370,8 +372,153 @@ Vous aurez besoin des programmes `cowsay` et `socat`.
 </details>
 </details>
 
-## 4.1.3 - Gestion de base des timers systemd
+</details>
 
-`list-timers`
+## 4.1.3 - Gestion de base des timers systemd
+Un autre type d'*unit* systemd avec lequel vous serez sûrement amené à travailler est la *timer unit*. 
+
+Un timer systemd est, comme son nom l'indique, un moyen de __planifier le lancement d'une autre *unit*__ (par exemple une *service unit*) dans le temps.
+
+A l'aide d'un timer, vous pouvez par exemple retarder de 30 secondes le lancement d'un service après le démarrage de l'OS (*monotonic timer, basé sur le délai*) ou encore lancer un service tous les 15 du mois (*real-time timer, basé sur l'horloge*) .
+
++ `systemctl list-timers [--all]` : affiche les timers existants
++ Par défaut, `<nom>.timer` planifie l'exécution de `<nom>.service`
+    - On peut planifier l'exécution d'une autre *unit* avec la directive `Unit=<unit>`
++ Exemple de *Timer Unit* :
+    - Exemple :
+        * ```ini
+            #logrotate.timer - exécutera logrotate.service
+            # du paquet logrotate - pour clore et archiver les fichiers de logs à intervalles réguliers, voire supprimer les logs trop anciens
+            [Unit]
+            Description=Daily rotation of log files
+            Documentation=man:logrotate(8) man:logrotate.conf(5)
+            # Comme toutes les units, les timers peuvent avoir des dépendances, un ordre d'exécution, des conflits ...
+
+            [Timer] # section propre aux Timer Units
+            OnCalendar=daily # Exécution du service n'importe quel jour à minuit
+            AccuracySec=1h # tick toutes les 1h (on se rend compte qu'on devait exécuter le service au max 1h plus tard)
+            Persistent=true # Le timer n'est pas désactivé une fois le service lancé - le service sera donc relancé périodiquement
+            # On va donc relancer logrotate.service tous les jours, à minuit, avec au maximum une heure de retard.
+
+
+            [Install]
+            WantedBy=timers.target # Installe le timer pour qu'il soit lancé au démarrage
+            ```
++ **Contrôler un *timer* :**
+    - Les timers se contrôlent avec `systemctl`, exactement comme les services. En revanche, cette fois, vous devez explicitement spécifier le `.timer` après le nom de l'*unit*.
+        * *E.g.* `sudo systemctl enable blakeetmor.timer`
+        * `start`, `restart`, `stop`, `enable`, `disable` ...
+    - L'unité contrôlée par le timer n'a alors pas a être activée / lancée par `systemctl` - il suffit que le timer soit activé, pour qu'il la lance une fois le moment venu.
+    
+<details><summary>Directives utiles pour une <i>Timer Unit</i> :</summary>
+
+- `OnCalendar` : Planifier par rapport à la date et heure du système
+    * Forme normale : `Mon[day]`, `Tues[day]` ... pour le jour de la semaine, `<YYYY>-<MM>-<DD>` pour la date, et `<hh>:<mm>[:<ss>]` pour l'heure
+        * Opérateurs spéciaux :
+            * Joker avec l'opérateur `*` : `*-*-15` *(tous les 15 du mois)*
+            * Valeurs multiples avec l'opérateur `,` : `*-*-* *:15,30,45,00` *(toutes les 15 minutes)*
+            * Range avec l'opérateur `..` : `Mon..Fri 10:30` *(du lundi au vendredi, à 10h30)*
+            * Step avec l'opérateur `/` : `*-*-11/2` *(tous les 2 jours à partir du 11 du mois)*
+        * Exemples :
+            * `2024-01-01` : Le premier avril à minuit
+            * `2024-01-01 10:15` : Le premier avril à 10h15
+            * `2024-01-01 10:15:37` : Le premier avril à 10h15 et 37 secondes
+            * `*-*-15 22:59` : Tous les 15 du mois à 22h59
+            * `Mon..Fri 22:30`  : Du lundi au vendredi, à 22h30
+            * `Mon..Fri 2024-*-1/3 15:00` : Tous les trois jours ouvrés à 15h en 2024 à partir du 1er du mois
+    * **Timespecs spéciaux : `minutely`, `hourly`, `daily`, `monthly`, `quarterly`, `yearly`**
+        * *NB: Vous pouvez utiliser `systemd-analyze calendar <timespec> [--iterations=<n>]` pour voir la traduction en forme normale et le temps avant la[/les] prochaine[s] exécution[s].*
+- `OnActiveSec` : Délai à partir du moment où le timer est lancé
+    * `500ms`,
+    * `15s`,
+    * `2m`,
+    * `2min`,
+    * `3h`,
+    * `3hours`,
+    * `3hours 30min`,
+    * `2d`...
+- `OnBootSec` : Délai à partir du démarrage du système
+- `AccuracySec` : Durée entre les ticks (fréquence de check)
+    * (par exemple, `2h` signifie que l'on regarde si le moment de déclencher le service est passé une fois toutes les 2h.)
+- `Unit` : Indiquer explicitement l'*unit* contrôlée par ce timer.
+    * Par défaut, le *timer* contrôle le *service* portant le même nom.
+- *Voir [`man systemd.time`](https://www.freedesktop.org/software/systemd/man/latest/systemd.time.html#)* pour la syntaxe des timespecs et des durées
+</details>
+<details><summary><code>systemd-run</code> : permet de planifier rapidement une tâche ponctuelle,sans créer de <i>timer unit</i> manuellement - on parle de <i>transient timer</i></summary>
+
++ Par exemple, `sudo systemd-run --on-calendar="2024-01-01 10:00" wall "poisson d'avril"` écrira "poisson d'avril" à 10h00 le 1er avril 2024 sur tous les TTY (sorties consoles, que vous pouvez ouvrir en faisant *Ctrl+Alt+F1-F6*) 
++ Par exemple, `sudo systemd-run --on-active=5m systemctl stop httpd` arrêtera le service `httpd` dans 5 minutes.
+</details>
+<details><sumamry>Doc :</summary>
+
++ [`man systemd.timer`](https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html) (doc des timer units)
++ [`man systemd.time`](https://www.freedesktop.org/software/systemd/man/latest/systemd.time.html#) (syntaxe des timespecs et des durées)
++ [Doc d'Arch Linux concernant les timers systemd, avec exemples](https://wiki.archlinux.org/title/Systemd_(Fran%C3%A7ais)/Timers_(Fran%C3%A7ais))
+</details>
+
+### Exercices
+<details>
+
+#### Exercice 1 - Rolex €co+ (intermédiaire)
+<details>
+
++ Créez un service de type *oneshot* nommé *taslheure.service* qui affiche la date sur sa sortie standard, et redirigez sa sortie standard vers `/var/log/taslheure.log` en mode append.
+    - Vous pouvez tester le service en le démarrant manuellement.
+    - *Indices :*
+        * *`date`*
+        * *`man systemd.exec | grep -A40 -m1 StandardOutput`*
++ Créez un *monotonic timer* qui lance *taslheure.service* une fois par minute et lancez le.
+    - Vous pouvez tester le service en le démarrant manuellement.
+    - `tail -f /var/log/taslheure.log` doit afficher une nouvelle heure à chaque minute.
++ Modifiez votre timer pour lancer le service toutes les 5 secondes.
++ Arrêtez votre service.
+
+</details>
+
+#### Exercice 2 - Rappel important (intermédiaire)
+<details>
+
++ Créez un service de type *oneshot* nommé *reminder.service* qui écrit sur le tty/pts de votre terminal qu'il est l'heure de l'apéro.
+    - *Indices :*
+        * `tty` 
+        * `echo`
++ Créez un *real-time timer* qui lance ce service tous les jours à 18h
+</details>
+</details>
 
 ## 4.1.4 - Pour aller plus loin - Systemd : bien plus qu'un gestionnaire de services
+
+### Changer de target systemd
+
+### Les autres types d'unit systemd
+
+### Journald
+`systemd-cat`
+
+### Fonctionnement de systemd
++ IPC
++ Sockets
++ Parallélisation
+
+### D'autres fonctions assurées par la suite systemd
+Systemd est une suite logicielle dont l'étendue des fonctions est vaste. En plus de ses fonctions d'initialisateur de système, de gestionnaire de services, et de journalisation, systemd propose un grand nombre de *daemons*, *wrappers* et d'utilitaires qui peuvent assurer des fonctions "système" comme la détection automatique du matériel, le montage automatique des systèmes de fichier, la gestion de la date et de l'heure...
+
+S'il n'est pas nécessaire de connaître dans le détail ces démons, cela ne peut pas faire de mal pour la culture d'un admin sys.
+
++ `systemd-mount`
++ `systemd-udevd`
++ `systemd-timedated`
++ `systemd-resolved`
++ `systemd-timesyncd`
++ `systemd-networkd`
++ `systemd-localed`
++ `systemd-logind`
+
+Et bien d'autres encore ... Vous pouvez avoir un aperçu de tous les binaires de la suite systemd en listant `/usr/lib/systemd` et `/bin/systemd*`. Ils ont presque tous une *manpage* leur correspondant, comme par exemple `man systemd-hostnamed` ou `man systemd.network`.
+
+Puisque systemd est relativement récent, ces "services système" sont généralement des alternatives à d'autres méthodes (souvent plus anciennes). On remarque trois cas principaux :
++ **Le démon systemd fonctionne en parallèle avec une autre méthode** - par exemple, `systemd-mount` fonctionne à côté de `mount` et le fichier `/etc/fstab` qui assurent la même fonction. On peut utiliser les deux pour monter des systèmes de fichier. De la même manière, `systemd-resolved` peut être utilisé en plus de votre resolver DNS pour prodiguer ses fonctionnalités de résolution de noms avancées (multicast DNS, LLMNR ...)
++ **Le démon systemd n'est pas activé, mais remplacé par une autre méthode**. Ce peut être le cas avec `systemd-timesyncd` lorsqu'un client NTP plus avancé comme `chrony` ou `ntpd` est actifs. , ou avec activés par défaut
++ **Le démon systemd est un wrapper d'une méthode plus ancienne**. Par exemple [`systemd-udevd`](https://opensource.com/article/20/2/linux-systemd-udevd) fait appel à `udev` pour détecter les périphériques matériels et les inclure à l'arborescence. Le wrapper sert surtout à intégrer et interfacer cette fonctionnalité avec systemd, afin qu'il puisse réagir aux événements `udev` - par exemple, interpréter des *device units*, monter automatiquement un système de fichiers contenu sur un disque lorsqu'il est détecté, activer une connection *NetworkManager* lorsqu'une interface réseau est allumée.
+
+De manière générale, ne faites pas attention à tous ces services système fournis par la suite systemd. Ils sont conçus pour fonctionner automatiquement, sans configuration ou intervention particulière. Vous interagirez avec eux indirectement via des utilitaires comme `hostnamectl` et `timedatectl`, et il est pour le moment toujours recommandé d'utiliser les anciennes méthodes (comme `/etc/fstab` et `mount` au lieu de `systemd-mount`) pour customiser votre système.
