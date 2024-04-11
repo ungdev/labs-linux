@@ -24,7 +24,7 @@ Les services s'exécutent généralement en continu, dès le démarrage du syst�
             * Le RAMdisk initial (*initrd*) : Une image disque qui contient des modules de kernel (contrôleurs de disques, systèmes de fichiers...) qui permettent de monter la partition racine afin de poursuivre le démarrage du système
         * Le noyau, grâce aux modules contenus dans l'*initrd*, monte alors la partition racine au sommet de son arborescence de fichiers.
         * **Le noyau localise et exécute le programme `init`** contenu sur cette partition racine. C'est le **premier processus**, qui porte le **PID 1**.
-            * NB : sur une distribution utilisant *systemd*, `init` n'est autre qu'un lien pointant sur le programme `systemd`
+            * NB : sur une distribution utilisant *systemd*, `init` n'est autre qu'un lien pointant sur le programme `systemd`. Faites un `ls -l /bin/init` !
         * Le programme `systemd` lance ensuite, dans un certain ordre, tous les autres programmes nécessaires au démarrage du système ou que vous aurez paramétrés pour se lancer au boot - *NetworkManager* pour se connecter au réseau, *OpenSSH-Server* pour écouter les connexions SSH...
             * Les services à démarrer font partie d'une __*target*__, un groupe de services formant un ensemble cohérent. 
                 * Par exemple, `graphical.target` correspond au démarrage de l'OS en mode multi-utilisateurs et avec une interface graphique. `rescue.target` est quant à elle un mode de maintenance où seuls les services absolument indispensables sont lancés, un peu comme un mode sans échec sur Windows.
@@ -489,13 +489,92 @@ A l'aide d'un timer, vous pouvez par exemple retarder de 30 secondes le lancemen
 ## 4.1.4 - Pour aller plus loin - Systemd : bien plus qu'un gestionnaire de services
 
 ### Changer de target systemd
+<details><summary>Une <i>target</i> systemd est <u>soit un groupe d'<i>units</i> qui peut être géré comme une seule <i>unit</i></u>, soit un moyen de gérer l'ordre d'exécution et les dépendances d'autres units. Nous nous intéressons ici au premier cas.</summary>
 
-### Les autres types d'unit systemd
+- Exemple de groupe d'*units* : `rescue.target` contient uniquement les *units* absolument nécessaires pour une opération de maintenance. On peut démarrer le système en ciblant `rescue.target`, un peu comme un démarrage en mode sans échec sous Windows.
+    * Ces *targets* correspondent à un *RunLevel*  *SysV Init* -  par exemple, `rescue.target` correspond au *RunLevel 1*.
+    * D'ailleurs, pour une transition indolore à partir de *SysV Init*, *systemd* définit des alias nommés `runlevel0.target` à `runlevel6.target`
+- Exemple de *target* utilisée comme simple point de repère : `network.target` est marqué comme active une fois une connectivité réseau (par exemple avec Internet) établie. Les services qui ont besoin d'une connectivité réseau peuvent l'indiquer comme dépendance et s'exécuter uniquement une fois que `network.target` est active. Similairement, `time-set.target` est marqué actif une fois que l'heure du système a été réglée après synchronisation avec une source extérieure et les services qui ont besoin que le système soit à l'heure peuvent l'indiquer comme dépendance et s'exécuter uniquement après.
+
+</details>
+
++ Votre système a une __*default target*__, qui définit l'**état souhaité après son démarrage**.
+    - Sur un serveur, votre *default target* est en principe `multi-user.target`, qui correspond au *RunLevel 5* de *SysV Init*.
+       * Vous pouvez voir les *units* lancées par cette *target* en jetant un œil à `/etc/systemd/system/multi-user.target.wants/`; C'est là que *systemd* les symlinke après un `systemctl enable`.
+       * Pour voir l'*unit file* définissant une target, regardez plutôt à `/usr/lib/systemd/*.target`
+    - C'est en principe la *target* la plus "complète", avec le plus de services d'activés, qui correspond à une utilisation normale de votre serveur. Toutefois, pour un serveur avec interface graphique, il y a une *target* encore plus "complète" : `graphical.target`, qui démarre aussi les composants de la GUI.
+    - Pour changer votre *default target* :
+        * De manière permanente : `sudo systemctl set-default <new-dflt-target>` *(vous pouvez afficher l'actuelle avec `get-default`)*
+        * Pour un seul démarrage, à partir de GRUB :
+            * Il faut modifier les options en ligne de commande du kernel.
+            * Pour cela, appuyez sur `e` au démarrage, lors de l'exécution de GRUB, pour éditer les options de la *boot entry*.
+            * Ajoutez `systemd.unit=<target>` à la ligne de commande du kernel et faites `ctrl+x` pour démarrer avec ces paramètres.
+            * Le kernel lancera *systemd* en ciblant la target que vous avez choisie au lieu de la *default target*
+
++ La principale interaction que vous serez amenés à avoir avec les *targets* est la définition d'une *target* d'installation pour vos *units*. La section `[Install]` de l'*unit file* peut en effet définir les *targets* au sein desquelles intégrer votre *unit* lorsqu'elle est installée via un `systemctl enable <unit>`.
+    - Presque tous les services que vous déploierez (par exemple, un serveur SSH) seront installés à `multi-user.target`.  C'est la *default target* pour un serveur.
+
++ Toutefois, vous devez aussi savoir **isoler une _target_**, c'est-à-dire "changer de *target*", ce qui revient à éteindre toutes les *units* qui n'appartiennent pas à la *target* souhaitée et à ne garder actives que celles qui en sont membres.
+    - Par exemple, `sudo systemctl isolate rescue.target` vous permettra de passer en mode rescue et `sudo systemctl isolate multi-user.target` de repasser en mode `multi-user`.
+    - NB : Toutes les targets ne peuvent pas être isolées. Ce comportement est défini par la directive `AllowIsolate` d'une *target unit*.
+
++ Il y a des targets spéciales qui vous permettent d'**éteindre, mettre en hibernation ou redémarrer votre ordinateur**. Des commandes spéciales permettent d'interagir avec :
+    - `shutdown` : éteindre
+        * `shutdown -h now` : éteindre tout de suite
+        * `shutdown -h +5` : planifier une extinction dans 5 minutes
+        * `shutdown -h 10:30 "le serveur va s'éteindre, sauvegarde ton boulot ou faudra pas venir chialer quand t'auras perdu tes données"` : planifier une extinction à 10h30 et diffuser un message d'avertissement.
+            * Le message est affiché en direct sur tous les TTYs et lorsque quelqu'un se connecte par la suite.
+        * `shutdown --show` : montre si un shutdown est prévu et si oui, quand
+        * `shutdown -c` (*cancel*) : annule un shutdown
+        * En utilisant `shutdown -r` au lieu de `shutdown -h`, vous planifiez un __*reboot* plutôt qu'une extinction__.
+    - `reboot` : redémarrer
+        * `sudo reboot` : redémarre immédiatement
+        * Utilisez plutôt `shutdown -r` pour planifier le redémarrage et pouvoir l'annuler
+        * `sudo systemctl soft-reboot` : redémarrer uniquement les processus de l'espace utilisateur, sans redémarrer le noyau
+    - `systemctl suspend` : mettre en veille, économie d'energie
+        * Sauvegarde l'état du système dans la RAM et éteint la plupart des périphériques. La RAM reste alimentée.
+        * Risque de perte de l'état en cas de perte d'alimentation
+    - `systemctl hibernate` : mettre en veille prolongée
+        * Sauvegarde l'état du système sur disque pour pouvoir le restaurer tel quel à l'allumage.
+
+
+### Les autres types d'units systemd
+En plus de *services*, *timers* et *targets*, voici les autres types d'*units* que *systemd* est capable de gérer :
++ [socket](https://www.freedesktop.org/software/systemd/man/latest/systemd.socket.html) : pour __activer une autre *unit* lorsque des données sont reçues sur un *socket*__.
+    - Il peut s'agir d'un socket réseau, d'un socket sur un système de fichiers ou d'un socket d'IPC (communication interprocessus).
+    - Cela permet de **démarrer des services à la demande**, comme avec `xinetd`.
+      * : par exemple, plutôt que de laisser tourner en continu un serveur VPN utilisant le port 1194/UDP, on le lancerait à la demande uniquement lorsqu'une connexion entrante sur 1149/UDP  arriverait et on l'arrêterait une fois la connexion terminée. Le but est principalement d'optimiser des performances et d'économiser des ressources.
+    - Cela peut aussi permettre de paralléliser des services, en démarrant une instance parallèle chaque fois que le socket reçoit des données.
++ [mount](https://www.freedesktop.org/software/systemd/man/latest/systemd.mount.html) : Définir un système de fichier à monter, comme avec `/etc/fstab`
+    - On doit donner identifier le FS (block device, label ou UUID), indiquer son type et indiquer son point de montage
+    - L'unité doit être nommée selon le chemin du point de montage : `/mnt/bkup` donnera `mnt-bkup.mount`
+      * *(on supprime le premier '/' et on remplace les autres par des '-')*
+    - `start` monte le FS, et `enable` active le montage automatique au cours du démarrage
+    - On recommande pour l'instant de continuer à utiliser le traditionnel `/etc/fstab` pour définir des *mounts* à moins d'avoir une bonne raison (dépendances, conflits...)
++ [automount](https://unix.stackexchange.com/questions/570958/mount-vs-automount-systemd-units-which-one-to-use-for-what) : __monter un FS à la demande, uniquement quand il est accédé__ plutôt que de le monter au boot.
+    - Une *mount unit* du même nom doit exister
+    - Permet d'accélérer le démarrage en ne montant certains FS que lorsque l'on y accède plutôt que de tous les monter au démarrage
+    - `start` active la supervision du point de montage pour que le FS puisse être monté automatiquement, et `enable`  active cette supervision automatiquement au démarrage.
++ [device](https://www.enricozini.org/blog/2017/debian/systemd-07-devices/) : Définit la réaction de `systemd` quand un certain périphérique est détecté
+    - Permet par exemple de démarrer un certain service quand un certain périphérique est détecté, ou de définir des dépendances ou des conflits entre périphériques
+    - Obtient les événements de détection des périphériques via `udev`
++ [path](https://www.freedesktop.org/software/systemd/man/latest/systemd.path.html) : Superviser un chemin et contrôler d'autres *units* en fonction de ce qu'il s'y passe
+    - Exécuter un service tant qu'un certain fichier existe, lancer un service dès qu'un nouveau fichier apparaît dans un certain répertoire ...
+    - Par exemple, imaginons un serveur de partage servant à échanger des fichiers entre un réseau d'admin coupé d'internet et un réseau de bureautique. On voudrait que dès qu'un fichier soit ajouté dans le dossier `/srv/fshare-bur/`, un service de scan antivirus vérifie que le fichier est safe et d'un type autorisé avant de le déplacer dans `/srv/fshare-adm/` où les utilisateurs du réseau d'admin peuvent le récupérer. Dans l'autre sens, on voudrait exécuter un service de DLP (*Data Loss Prevention*) pour éviter la fuite d'informations sensibles de `/srv/fshare-adm/` vers `/srv/fshare-bur`. On pourrait mettre en œuvre une telle procédure grâce à une *path unit*, qui superviserait les deux dossiers et démarrerait automatiquement le bon service dès qu'un nouveau fichier serait déposé dans ces dossiers.
++ [scope & slices](https://unix.stackexchange.com/questions/688298/what-is-the-difference-between-a-systemd-scope-and-a-systemd-slice) : Pour définir des groupes de processus / *services* et limiter leurs ressources
+    - Un *scope* permet de grouper des processus qui n'ont pas été lancés par *systemd*
+    - Une *slice* permet de grouper des *scopes*, des *services* et d'autres *slices*
+    - On peut limiter les ressources disponibles pour tout un *scope* ou une *slice*, par exemple pour qu'un certain groupe de processus et services se partage au maximum 2G de RAM.
++ [swap](https://www.freedesktop.org/software/systemd/man/latest/systemd.swap.html) : Comme un *mount* pour une partition de *swap* (partition spécialement formatée pour pouvoir être utilisée comme extension de la mémoire virtuelle.)
+    - Permet de stocker le surplus de données sur disque lorsque la RAM n'est plus suffisante (mais attention, les I/O sont beaucoup plus lentes lorsque l'on a recours au swap)
+    - On préfère pour le moment utiliser le traditionnel `/etc/fstab` pour définir de nouveaux espaces de *swap*.
 
 ### Journald
 `systemd-cat`
 
 ### Fonctionnement de systemd
+*Systemd* utilise des concepts avancés de la programmation système, qui font sa force.
+
 + IPC
 + Sockets
 + Parallélisation
