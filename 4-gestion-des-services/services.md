@@ -230,6 +230,8 @@ Il est important de savoir interpréter une *service unit*, voire d'être en mes
         * `stop` : arrêter proprement
         * `kill` : laisser le kernel arrêter le processus méchamment
         * `continue` : ne pas toucher à ce service
+    - `RootDirectory` : Un dossier dans lequel faire un *chroot*, à des fins d'isolation
+    - `InaccessibleDirectory` : Un dossier à rendre inaccessible au service, à des fins d'isolation
 + Section `[Install]`
     - **`WantedBy`**, `RequiredBy` : Directives réverses de `[Unit].Wants` et `[Unit].Requires` : cette *unit* devient la dépendance d'une autre *unit* (le plus souvent, une *target*).
         * Par exemple, `WantedBy=multi-user.target` tentera de démarrer le service lorsque le système atteindra la *target* `multi-user.target` au cours du processus de démarrage.
@@ -467,11 +469,11 @@ A l'aide d'un timer, vous pouvez par exemple retarder de 30 secondes le lancemen
     - *Indices :*
         * *`date`*
         * *`man systemd.exec | grep -A40 -m1 StandardOutput`*
-+ Créez un *monotonic timer* qui lance *taslheure.service* une fois par minute et lancez le.
++ Créez un *monotonic timer* qui lance *taslheure.service* une fois par minute, activez-le au démarrage et lancez-le dès maintenant.
     - Vous pouvez tester le service en le démarrant manuellement.
-    - `tail -f /var/log/taslheure.log` doit afficher une nouvelle heure à chaque minute.
+    - `tail -f /var/log/taslheure.log` doit afficher une nouvelle date à chaque minute.
 + Modifiez votre timer pour lancer le service toutes les 5 secondes.
-+ Arrêtez votre service.
++ Arrêtez le timer.
 
 </details>
 
@@ -487,8 +489,12 @@ A l'aide d'un timer, vous pouvez par exemple retarder de 30 secondes le lancemen
 </details>
 
 ## 4.1.4 - Pour aller plus loin - Systemd : bien plus qu'un gestionnaire de services
+<details><summary>Mais <i>systemd</i> fait bien plus que simplement gérer l'exécution de vos services. C'est une véritable usine à gaz qui s'occupe de plein d'autres aspects de votre système. Nous récapitulons ici l'essentiel, mais invitons les curieux à jeter un œil à [https://systemd.io/](https://systemd.io/).
+
 
 ### Changer de target systemd
+<details>
+
 <details><summary>Une <i>target</i> systemd est <u>soit un groupe d'<i>units</i> qui peut être géré comme une seule <i>unit</i></u>, soit un moyen de gérer l'ordre d'exécution et les dépendances d'autres units. Nous nous intéressons ici au premier cas.</summary>
 
 - Exemple de groupe d'*units* : `rescue.target` contient uniquement les *units* absolument nécessaires pour une opération de maintenance. On peut démarrer le système en ciblant `rescue.target`, un peu comme un démarrage en mode sans échec sous Windows.
@@ -516,6 +522,7 @@ A l'aide d'un timer, vous pouvez par exemple retarder de 30 secondes le lancemen
 
 + Toutefois, vous devez aussi savoir **isoler une _target_**, c'est-à-dire "changer de *target*", ce qui revient à éteindre toutes les *units* qui n'appartiennent pas à la *target* souhaitée et à ne garder actives que celles qui en sont membres.
     - Par exemple, `sudo systemctl isolate rescue.target` vous permettra de passer en mode rescue et `sudo systemctl isolate multi-user.target` de repasser en mode `multi-user`.
+    - Vous avez aussi `sudo systemctl emergency`, équivalent à `sudo systemctl isolate emergency.target`
     - NB : Toutes les targets ne peuvent pas être isolées. Ce comportement est défini par la directive `AllowIsolate` d'une *target unit*.
 
 + Il y a des targets spéciales qui vous permettent d'**éteindre, mettre en hibernation ou redémarrer votre ordinateur**. Des commandes spéciales permettent d'interagir avec :
@@ -536,10 +543,12 @@ A l'aide d'un timer, vous pouvez par exemple retarder de 30 secondes le lancemen
         * Risque de perte de l'état en cas de perte d'alimentation
     - `systemctl hibernate` : mettre en veille prolongée
         * Sauvegarde l'état du système sur disque pour pouvoir le restaurer tel quel à l'allumage.
+</details>
 
 
 ### Les autres types d'units systemd
-En plus de *services*, *timers* et *targets*, voici les autres types d'*units* que *systemd* est capable de gérer :
+<details><summary>En plus de <i>services</i>, <i>timers</i> et <i>targets</i>, <i>systemd</i> a recours à d'autres types d'<i>units</i> :</summary>
+
 + [socket](https://www.freedesktop.org/software/systemd/man/latest/systemd.socket.html) : pour __activer une autre *unit* lorsque des données sont reçues sur un *socket*__.
     - Il peut s'agir d'un socket réseau, d'un socket sur un système de fichiers ou d'un socket d'IPC (communication interprocessus).
     - Cela permet de **démarrer des services à la demande**, comme avec `xinetd`.
@@ -569,20 +578,65 @@ En plus de *services*, *timers* et *targets*, voici les autres types d'*units* q
     - Permet de stocker le surplus de données sur disque lorsque la RAM n'est plus suffisante (mais attention, les I/O sont beaucoup plus lentes lorsque l'on a recours au swap)
     - On préfère pour le moment utiliser le traditionnel `/etc/fstab` pour définir de nouveaux espaces de *swap*.
 
+</details>
+
 ### Journald
-`systemd-cat`
+*systemd* a son propre système de journalisation, `journald`, qui tourne sous la forme du service `systemd-journald`. 
+
+C'est un outil de journalisation puissant, qui recueille les logs de vos *units systemd*, mais aussi d'autres logs comme ceux du kernel. *journald* ne se contente pas de recueillir les logs mais peut aussi les rediriger (par exemple vers un système de journalisation *Syslog*), gèrer leur rotation (*e.g. créer un nouveau fichier de logs toutes les semaines, compresser les anciens fichiers de logs, supprimer les fichiers de logs de plus de 3 mois.*) et respecter des quotas (*e.g. maximum 100 fichiers et 5G de disque*).
+
+Les fichiers de logs ne sont pas au format texte mais au format binaire, donc ils ne peuvent pas être lus directement. Ils sont stockés sous `/var/log/journal/$(dbus-uuidgen --get)/`. 
+
+Pour lire et filtrer les logs *journald*, on utilise la commande **`journalctl`** :
++ `journalctl -eu <systemd-unit>`: Logs d'une *unit systemd* (surtout utilisé pour debug les services)
+    - Ajouter `-x` pour des explications sur les lignes qui le supportent
++ `-p <syslog-severity>` : filtrage par niveau de sévérité. Utilise les 8 niveaux Syslog
+    - `emerg` (0)
+    - `err` (3) - erreurs
+    - `warn` (4) - avertissements
+    - `info` (6)
+    - `debug` (7)
++ `-k` ou `--dmesg` : messages du kernel (principalement générés au démarrage et au chargement de modules)
++ `-r` : reverse (messages du plus récent au moins réceent)
++ `-f` : en live (voir les 10 derniers messages, puis les prochains à partir de maintenant)
++ `-n <n>` : Les `<n>` derniers messages
++ `--since <timespec> --until <timespec>`
+    - `journalctl --since yesterday`
+    - `journalctl --since 2023-31-12 20:20 --until 2023-31-12 20:30`
++ `-b <boot-id-or-idx>` : Logs produits par le système pour un boot en particulier
+    - `journalctl --list-boots` : lister les précédents boots. Ils ont chacun un ID qui les identifie de manière unique et un index qui les identifie relativement au boot actuel.
+    - `journalctl -b-1 -k` : messages de kernel du précédent boot.
++ `-D <journal-dir>` : Indiquer explicitement un chemin vers le dossier de journaux
+    - Utile quand on essaye de consulter les logs d'un OS qui ne boote plus : on boot sur une live ISO, on monte la partition contenant `/var/log` et on scanne ses logs avec `journalctl -D /mnt/broken-fs/var/log/journal`
++ `_UID=1000` : exemple de filtre.
+    - `man systemd.journal-fields` pour d'autres exemples de filtres
+
+Pour écrire vous-même dans le journal, vous pouvez utiliser `systemd-cat`. Ce peut-être une bonne chose si vous écrivez des scripts interagissant avec des fonctions bas-niveau de l'OS comme des scripts *Dispatcher* pour *NetworkManager*.
 
 ### Fonctionnement de systemd
-*Systemd* utilise des concepts avancés de la programmation système, qui font sa force.
+*Systemd* utilise des concepts avancés de programmation système qui font sa force.
 
 + IPC
-+ Sockets
+    - *Systemd* utilise des mécanismes de communications interprocessus avancés pour déclencher des *units* lors de la survenue d'un événement et communiquer avec les services qu'il gère :
+        * Des [sockets UNIX](https://www.malekal.com/unix-socket-fonctionnement-et-utilisations/) basiques
+        * Mais aussi [D-Bus](https://www.freedesktop.org/wiki/Software/systemd/dbus/), un système avancé d'IPC qui gère notamment un "bus système" permettant une communication efficace entre les services système (comme *NetworkManager* ou *systemd-timesyncd*) ainsi qu'un "bus de session" pour les 
+        services utilisateurs (comme une session graphique).
 + Parallélisation
+    * L'un des grands avantages de *Systemd* par rapport à *SysV Init* est qu'il parallélise dans la mesure du possible le lancement des services, là où *SysV Init* le séquentialisait. Il le fait simplement
+    * Il y a un gain important en termes de rapidité de démarrage.
+    * La manière dont *systemd* permet de gérer les dépendances et les conflits rend cette parallélisation facile à gérer et totalement transparente à nos yeux - nous n'avons pas à nous en préoccuper. Il faut juste le savoir pour certains cas particuliers, par exemple lorsqu'il faut attendre qu'un programme ait eu le temps de s'initialiser avant de marquer le service comme actif plutôt que de le faire dès que *systemd* l'a lancé.
++ [Signaux](https://www.educative.io/answers/what-are-linux-signals)
+    * `systemd` utilise aussi des signaux pour communiquer avec les processus. Par exemple, par défaut, `systemctl stop <service>` envoie un signal `SIGTERM` au processus principal de ce service, ce qui le "termine gentiment". Certains services supportent de recharger leur configuration sans interruption de service, et et s'attendent généralement à catch le signal `SIGHUP` pour le faire.
+    * En pratique, *systemd* lance un signal soit directement via l'appel système *kill* ou par la commande GNU kill qui utilise justement cet appel système.
+        * Un signal est simplement une constante qui a le plus souvent une signification prédéfinie pour le noyau (par exemple `SIGKILL`=9 veut dire "interrompre le processus méchament") et qui est passée au noyau avec le PID d'un processus cible. 
+        * Le signal qui peut être intercepté ou non par le programme cible (par exemple, `SIGHUP` peut être intercepté par le programme cible qui peut alors décider de recharger sa configuration sans s'interrompre.). Si le signal peut être intercepté, le noyau notifie le processus cible qu'il a reçu ce signal. Sinon, le noyau exécute l'action impliquée par ce signal sur le processus cible (par exemple, un `SIGKILL` ne peut pas être intercepté, sinon un processus pourrait refuser d'être terminé par le noyau).
++ [Cgroups](https://fr.wikipedia.org/wiki/Cgroups)
+    * `systemd` a recours aux *cgroups* du noyau linux pour définir des groupes hiérarchiques de processus et éventuellement réserver ou limiter des ressources à ces processus.
 
-### D'autres fonctions assurées par la suite systemd
+### Autres fonctions assurées par la suite systemd
 Systemd est une suite logicielle dont l'étendue des fonctions est vaste. En plus de ses fonctions d'initialisateur de système, de gestionnaire de services, et de journalisation, systemd propose un grand nombre de *daemons*, *wrappers* et d'utilitaires qui peuvent assurer des fonctions "système" comme la détection automatique du matériel, le montage automatique des systèmes de fichier, la gestion de la date et de l'heure...
 
-S'il n'est pas nécessaire de connaître dans le détail ces démons, cela ne peut pas faire de mal pour la culture d'un admin sys.
+S'il n'est pas nécessaire de connaître dans le détail ces démons, cela ne peut pas faire de mal pour la culture d'un admin sys. Utilisez `man` pour comprendre le rôle des daemons suivants :
 
 + `systemd-mount`
 + `systemd-udevd`
@@ -600,4 +654,6 @@ Puisque systemd est relativement récent, ces "services système" sont général
 + **Le démon systemd n'est pas activé, mais remplacé par une autre méthode**. Ce peut être le cas avec `systemd-timesyncd` lorsqu'un client NTP plus avancé comme `chrony` ou `ntpd` est actifs. , ou avec activés par défaut
 + **Le démon systemd est un wrapper d'une méthode plus ancienne**. Par exemple [`systemd-udevd`](https://opensource.com/article/20/2/linux-systemd-udevd) fait appel à `udev` pour détecter les périphériques matériels et les inclure à l'arborescence. Le wrapper sert surtout à intégrer et interfacer cette fonctionnalité avec systemd, afin qu'il puisse réagir aux événements `udev` - par exemple, interpréter des *device units*, monter automatiquement un système de fichiers contenu sur un disque lorsqu'il est détecté, activer une connection *NetworkManager* lorsqu'une interface réseau est allumée.
 
-De manière générale, ne faites pas attention à tous ces services système fournis par la suite systemd. Ils sont conçus pour fonctionner automatiquement, sans configuration ou intervention particulière. Vous interagirez avec eux indirectement via des utilitaires comme `hostnamectl` et `timedatectl`, et il est pour le moment toujours recommandé d'utiliser les anciennes méthodes (comme `/etc/fstab` et `mount` au lieu de `systemd-mount`) pour customiser votre système.
+De manière générale, ne faites pas attention à tous ces services système fournis par la suite *systemd*. Ils sont conçus pour fonctionner automatiquement, sans configuration ou intervention particulière. Vous interagirez avec eux indirectement via des utilitaires comme `hostnamectl` et `timedatectl`, et il est pour le moment toujours recommandé d'utiliser les anciennes méthodes (comme `/etc/fstab` et `mount` au lieu de `systemd-mount`) pour customiser votre système.
+
+</details>
