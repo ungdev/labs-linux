@@ -246,6 +246,8 @@ Il y a de nombreuses autres directives utilisées dans les *service units* et ch
 + [`man systemd.service`](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
 + [`man systemd.exec`](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html)
 
+Pour finir, il vaut le coup de jeter un œil au concept de [**_templates_ de services**](https://ibug.io/blog/2019/07/systemd-service-template/), qui vous permettent de définir un modèle générique à partir duquel seront créées des *service units* spécifiques - par exemple, qui utilisent l'UID de l'utilisateur qui lance le service comme variable.
+
 </details>
 
 ### Exercices
@@ -377,7 +379,7 @@ Vous aurez besoin des programmes `cowsay` et `socat`.
 </details>
 
 ## 4.1.3 - Gestion de base des timers systemd
-Un autre type d'*unit* systemd avec lequel vous serez sûrement amené à travailler est la *timer unit*. 
+<details><summary>Un autre type d'<i>unit</i> systemd avec lequel vous serez sûrement amené à travailler est la <i>timer unit</i>.</summary>
 
 Un timer systemd est, comme son nom l'indique, un moyen de __planifier le lancement d'une autre *unit*__ (par exemple une *service unit*) dans le temps.
 
@@ -456,6 +458,8 @@ A l'aide d'un timer, vous pouvez par exemple retarder de 30 secondes le lancemen
 + [`man systemd.timer`](https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html) (doc des timer units)
 + [`man systemd.time`](https://www.freedesktop.org/software/systemd/man/latest/systemd.time.html#) (syntaxe des timespecs et des durées)
 + [Doc d'Arch Linux concernant les timers systemd, avec exemples](https://wiki.archlinux.org/title/Systemd_(Fran%C3%A7ais)/Timers_(Fran%C3%A7ais))
+</details>
+
 </details>
 
 ### Exercices
@@ -581,7 +585,7 @@ A l'aide d'un timer, vous pouvez par exemple retarder de 30 secondes le lancemen
 </details>
 
 ### Journald
-*systemd* a son propre système de journalisation, `journald`, qui tourne sous la forme du service `systemd-journald`. 
+<details><summary><i>systemd</i> a son propre système de journalisation, <code>journald</code>, qui tourne sous la forme du service <code>systemd-journald</code>.</summary>
 
 C'est un outil de journalisation puissant, qui recueille les logs de vos *units systemd*, mais aussi d'autres logs comme ceux du kernel. *journald* ne se contente pas de recueillir les logs mais peut aussi les rediriger (par exemple vers un système de journalisation *Syslog*), gèrer leur rotation (*e.g. créer un nouveau fichier de logs toutes les semaines, compresser les anciens fichiers de logs, supprimer les fichiers de logs de plus de 3 mois.*) et respecter des quotas (*e.g. maximum 100 fichiers et 5G de disque*).
 
@@ -613,8 +617,10 @@ Pour lire et filtrer les logs *journald*, on utilise la commande **`journalctl`*
 
 Pour écrire vous-même dans le journal, vous pouvez utiliser `systemd-cat`. Ce peut-être une bonne chose si vous écrivez des scripts interagissant avec des fonctions bas-niveau de l'OS comme des scripts *Dispatcher* pour *NetworkManager*.
 
+</details>
+
 ### Fonctionnement de systemd
-*Systemd* utilise des concepts avancés de programmation système qui font sa force.
+<details><summary><i>Systemd</i> utilise des concepts avancés de programmation système qui font sa force.</summary>
 
 + IPC
     - *Systemd* utilise des mécanismes de communications interprocessus avancés pour déclencher des *units* lors de la survenue d'un événement et communiquer avec les services qu'il gère :
@@ -633,8 +639,10 @@ Pour écrire vous-même dans le journal, vous pouvez utiliser `systemd-cat`. Ce 
 + [Cgroups](https://fr.wikipedia.org/wiki/Cgroups)
     * `systemd` a recours aux *cgroups* du noyau linux pour définir des groupes hiérarchiques de processus et éventuellement réserver ou limiter des ressources à ces processus.
 
+</details>
+
 ### Autres fonctions assurées par la suite systemd
-Systemd est une suite logicielle dont l'étendue des fonctions est vaste. En plus de ses fonctions d'initialisateur de système, de gestionnaire de services, et de journalisation, systemd propose un grand nombre de *daemons*, *wrappers* et d'utilitaires qui peuvent assurer des fonctions "système" comme la détection automatique du matériel, le montage automatique des systèmes de fichier, la gestion de la date et de l'heure...
+<details><summary><i>Systemd</i> est une suite logicielle dont l'étendue des fonctions est vaste. En plus de ses fonctions d'initialisateur de système, de gestionnaire de services, et de journalisation, <i>systemd</i> propose un grand nombre de <i>daemons</i>, <i>wrappers</i> et d'utilitaires qui peuvent assurer des fonctions "système" comme la détection automatique du matériel, le montage automatique des systèmes de fichier, la gestion de la date et de l'heure...</summary>
 
 S'il n'est pas nécessaire de connaître dans le détail ces démons, cela ne peut pas faire de mal pour la culture d'un admin sys. Utilisez `man` pour comprendre le rôle des daemons suivants :
 
@@ -655,5 +663,7 @@ Puisque systemd est relativement récent, ces "services système" sont général
 + **Le démon systemd est un wrapper d'une méthode plus ancienne**. Par exemple [`systemd-udevd`](https://opensource.com/article/20/2/linux-systemd-udevd) fait appel à `udev` pour détecter les périphériques matériels et les inclure à l'arborescence. Le wrapper sert surtout à intégrer et interfacer cette fonctionnalité avec systemd, afin qu'il puisse réagir aux événements `udev` - par exemple, interpréter des *device units*, monter automatiquement un système de fichiers contenu sur un disque lorsqu'il est détecté, activer une connection *NetworkManager* lorsqu'une interface réseau est allumée.
 
 De manière générale, ne faites pas attention à tous ces services système fournis par la suite *systemd*. Ils sont conçus pour fonctionner automatiquement, sans configuration ou intervention particulière. Vous interagirez avec eux indirectement via des utilitaires comme `hostnamectl` et `timedatectl`, et il est pour le moment toujours recommandé d'utiliser les anciennes méthodes (comme `/etc/fstab` et `mount` au lieu de `systemd-mount`) pour customiser votre système.
+
+</details>
 
 </details>
