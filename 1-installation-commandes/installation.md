@@ -135,6 +135,8 @@ Tl;dr :
         * Les dépôts sont versionnés et les nouvelles versions sont publiées à **intervalles longs et réguliers** (6-12 mois)
         * Généralement **plus stables**
         * Moins de risques d'échec de la mise à jour automatique
+        * Les paquets ont été éprouvés, vérifiés
+          * Par exemple, la backdoor récemment introduite dans le paquet *xz* (découverte le 29/03/2024) n'a pas impacté les distributions *point release*, car la nouvelle version du paquet n'avait pas encore été introduite dans les repos officiels. 
     - Les [**_rolling_** releases](https://wiki.manjaro.org/index.php/The_Rolling_Release_Development_Model)
         * Les dépôts sont mis à jour paquet par paquet, à n'importe quel moment, plutôt qu'à des intervalles réguliers
         * **Nouveautés disponibles rapidement**, souvent moins stable
