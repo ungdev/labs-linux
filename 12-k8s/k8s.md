@@ -151,7 +151,11 @@ Un **replicaSet** est un composant qui permet de garantir un nombre spécifique 
 Il est souvent crée automatiquement par un deployment.  
 On y revient plus tard.
 
-`TODO`
+<img src="img/k8s_RS.png" width=70%>
+
+> TL;DR:
+> - Un replicaSet est un composant qui permet de garantir un nombre spécifique de réplicas de pods.
+> - Un replicaSet est souvent crée automatiquement par un deployment.
 
 #### StatefulSets
 
@@ -159,25 +163,32 @@ Un **statefulSet** est un composant qui permet de garantir un nombre spécifique
 
 Un statefulSet est utilisé pour les applications qui ont besoin de garder un état, comme une base de données.
 
-`TODO`
+Ici on a une base de données qui a besoin de garder un état, et qui est associée à un statefulSet. On a le premier pod qui est en lecture/écriture, et le deuxième pod (et troisième) qui est en lecture seule.
+
+<img src="img/k8s_SS.png" width=90%>
+
+> TL;DR:
+> - Les pods crée par un statefulSet sont stateful.
+> - Un statefulSet est utilisé pour les applications qui ont besoin de garder un état.
 
 
 #### DaemonSets
 
 Un **daemonSet** est un composant qui permet de déployer un pod sur chaque worker node. Un daemonSet est utilisé pour les applications qui doivent être exécutées sur chaque worker node, comme un agent de monitoring.
 
-`TODO`
-
 
 #### Jobs
 
 Un **job** est un composant qui permet d'exécuter une tâche à la demande. Un job est utilisé pour les tâches qui doivent être exécutées une seule fois, comme un script de migration de base de données.
-
-`TODO`
 
 
 #### CronJobs
 
 Un **cronJob** est un composant qui permet d'exécuter une tâche à intervalle régulier. Un cronJob est utilisé pour les tâches qui doivent être exécutées régulièrement, comme un script de sauvegarde de base de données.
 
-`TODO`
+
+#### Namespace
+
+Un **namespace** est un composant qui permet de diviser un cluster Kubernetes en plusieurs clusters virtuels. Un namespace permet de diviser un cluster Kubernetes en plusieurs clusters virtuels, et de définir des quotas de ressources pour chaque namespace.
+
+### 12.1.2.C Architecture d'un cluster Kubernetes
