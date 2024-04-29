@@ -66,7 +66,7 @@ Voici la liste des thématiques actuellement disponibles et à venir:
 * [Thématique 4: Gestion des services]
 * [Thématique 5: Sécurité des serveurs web]
 * [Thématique 6: Installation d'une application web]
-* [Thématique 7: Surveillance et maintenance]
+* [Thématique 7: Surveillance et maintenance](7-surveillance-et-maintenance/README.md)
 * [Thématique 8: Docker](8-docker/README.md)
 * [Thématique 9: Sauvegarde et Restauration]
 * [Thématique 10: Documentation et Bonnes Pratiques](10-documentation-et-bonnes-pratiques/README.md)
