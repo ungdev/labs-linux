@@ -1,0 +1,36 @@
+# sudo cp /usr/lib/systemd/system/sshd.service /etc/systemd/system/mysshd.service
+# sudo mkdir /srv/mysshd
+# sudo useradd -md /srv/mysshd/guest guest
+# sudo passwd guest # indiquer le mdp : guest
+# sudo mkdir /srv/mysshd/keys; sudo ssh-keygen -t ed25519 # renseigner le chemin de clef /srv/mysshd/keys/id_mysshd
+
+# /etc/systemd/system/mysshd.service
+[Unit]
+Description=My SSHD
+Wants=sshdgenkeys.service
+After=sshdgenkeys.service
+After=network.target
+ConditionPathExists=/srv/mysshd/id_mysshd
+
+[Service]
+ExecStart=/usr/bin/sshd \
+        -E/var/log/mysshd/mysshd.log \
+        -p2222 \
+        -h/srv/mysshd/id_mysshd \
+        -o "LogLevel=INFO" -o "AllowUsers=guest" 
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+# sudo systemctl daemon-reload
+# sudo systemctl start mysshd
+# systemctl status mysshd
+# ssh -p2222 guest@localhost # doit marcher
+# sudo cat /var/log/mysshd/mysshd.log
+# sudo systemctl enable mysshd
+# sudo systemctl start sshd; systemctl status mysshd; systemctl status sshd
+# sudo mv /srv/mysshd/id_mysshd /srv/mysshd/id_mysshd.old; sudo systemctl start mysshd; sudo systemctl status mysshd # doit pas marcher car la condition sur l'existence de la clef SSH ne passe plus
+# sudo rm /etc/systemd/system/mysshd.service

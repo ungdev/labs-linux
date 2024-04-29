@@ -63,7 +63,7 @@ Voici la liste des thématiques actuellement disponibles et à venir:
 * [Thématique 1: Installation & Commandes de base](1-installation-commandes/README.md)
 * [Thématique 2: Configuration de base](2-config-de-base/README.md)
 * [Thématique 3: Serveur web de base]
-* [Thématique 4: Gestion des services]
+* [Thématique 4: Gestion des services](4-gestion-des-services/README.md)
 * [Thématique 5: Sécurité des serveurs web]
 * [Thématique 6: Installation d'une application web]
 * [Thématique 7: Surveillance et maintenance]
